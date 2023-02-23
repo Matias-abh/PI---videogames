@@ -1,0 +1,88 @@
+
+
+
+.filtered {
+    display: flex;
+    justify-content: flex-end;
+    width: 71%;
+    height: 10rem;
+
+
+}
+
+
+.contFilterOptions {
+    width: 40%;
+    height: 5rem;
+
+}
+
+.contFilterBtn {
+    background-color: #240046;
+    position: relative;
+    z-index: 50;
+    top: .2rem;
+
+    color: #fff;
+    font-size: .9rem;
+    
+    cursor: pointer;
+    width: fit-content;
+    min-width: 92%;
+    height: 4rem ;
+
+    box-shadow: 0 0 5px black;
+    
+    padding: 1.12rem 1rem 1.12rem 1.6rem;
+    border-radius: 4px;
+}
+
+.ulFilter {
+    /* background-color: #59189adb; */
+    background-color: #121212dc;
+    cursor: pointer;
+    position: absolute;
+    z-index: 40;
+    /* top: -10rem;     */
+    
+    width: 20%;
+    padding: 0;
+    border-radius: 4px;
+    box-shadow: 8px 8px 18px black;
+    
+    opacity: 0;
+    display: none;
+
+    transition: top 1s;
+    animation: activeFilterOptions .36s forwards ease-out;
+
+}   
+@keyframes activeFilterOptions {
+        from {
+            top: -40rem;
+            opacity: 0;
+        }
+        to {
+            top: 4.4rem;
+            opacity: 1;
+        }
+    }
+
+
+.contFilterOptions li {
+    list-style: none;
+    color: #fff;
+    border-radius: 4px;
+    padding: .54rem 1rem;    
+
+    transition: background .2s, color .2s;
+}
+    .contFilterOptions li:hover {
+        background-color: rgba(245, 245, 220, 0.564);
+        color: #121212;
+    }
+
+    
+    .activeFilterOpcions {
+        display: block;
+    }

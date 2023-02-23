@@ -1,0 +1,210 @@
+
+
+.contArrowMenu img {
+    position: fixed;
+    z-index: 300;
+    top: 1.46rem;
+    left: .8rem;
+    width: 2.2rem;
+    height: auto;
+    object-fit: cover;
+    margin-right: .4rem;
+    cursor: pointer;
+    transition: transform .26s;
+}
+
+.activeArrowMenu {
+    transform: rotate(-180deg);
+    /* transform: scale(1); */
+}
+.contArrowMenu img:hover {
+    opacity: .86;
+    /* transform: scale(1.06); */
+}
+
+.contTitle {
+    /* position: relative;
+    z-index: 300; */
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+}
+
+.title {
+    /* background-color: crimson; */
+    text-decoration: none;
+    /* font-size: 1.2rem; */
+    width: 8rem;
+    margin-left: -2.44rem;
+    padding-top: 8px;
+
+    /* transform: rotate(-5deg); */
+}
+
+
+.ordered {
+    background-color: rgba(0, 0, 0, 0.759);
+    position: fixed;
+    z-index: 150;
+    top: 0;
+    left: -20rem;
+
+    color: #fff;
+    width: 18rem;
+    height: 100vh;
+
+    display: none;
+    animation: activeOrderedMenu .6s forwards;
+}
+    @keyframes activeOrderedMenu {
+        from {
+            left: -20rem;
+        }
+        to {
+            left: 0;
+        }
+    }
+
+
+.activeOrderedMenu {
+    /* background-color: aqua; */
+    display: block;
+}
+
+
+
+
+.arrowAlpha {
+    width: 8%;
+    height: auto;
+    object-fit: cover;
+    margin-left: 34px;
+    transform: rotate(-180deg);
+
+    transition: transform .24s;
+}
+
+.arrowRating {
+    width: 8%;
+    height: auto;
+    object-fit: cover;
+    margin-left: 50px;    
+    transform: rotate(-180deg);
+
+    transition: transform .24s;
+}
+    .closeUl {
+        transform: rotate(0);    
+    }
+
+
+
+.contOrderAlpha {
+    /* background-color: rgba(0, 0, 0, 0.66); */
+    width: 100%;
+    font-size: .9rem;
+    /* height: 12rem; */ 
+    margin-top: 1rem;
+
+}
+
+.contOrAlphaBtn {
+    /* background-color: rgba(0, 0, 0, 0.66); */
+    width: 100%;
+    height: 4.2rem;
+    border-radius: 4px;
+    border: 1px solid #aaaaaa92;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    transition: opacity .2s;
+}
+
+.contOrAlphaBtn h3 {
+    /* background-color: red; */
+    width: 11rem;
+    margin-left: .56rem;
+}
+
+.contOrRatingBtn h3 {
+    /* background-color: red; */
+    margin-left: -.7rem;
+}
+
+.contOrderRating {    
+    /* background-color: rgba(0, 0, 0, 0.66); */
+    font-size: .9rem;
+    width: 100%;
+    height: auto;
+
+}
+.contOrRatingBtn {
+    /* background-color: rgba(0, 0, 0, 0.66); */
+    width: 100%;
+    height: 4.2rem;
+    border-radius: 4px;
+    border: 1px solid #aaaaaa92;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity .2s;
+}
+
+.contOrAlphaBtn:hover, .contOrRatingBtn:hover {
+    opacity: .64;
+}
+
+
+.ulOrderAlpha {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    letter-spacing: .6px;
+    height: auto;
+
+    transition: transform .34s;
+}
+
+.ulOrderRating {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    letter-spacing: .6px;
+    height: auto;
+
+    transition: transform .34s;
+}
+    .extendedUl {
+        height: 0;
+        overflow: hidden;
+        transform: translateX(-4.4rem);
+    }
+
+
+.ulOrderAlpha li, .ulOrderRating li  {
+    cursor: pointer;
+    width: 100%;
+    
+    padding: 1rem 0;
+    padding-left: 1rem;
+    border-radius: 4px;
+    /* border-bottom: 1px solid #aaa; */
+    transition: background .2s, opacity .24s;
+}
+
+
+.ulOrderAlpha li:hover, .ulOrderRating li:hover  {
+    opacity: .48;
+    background-color: rgba(245, 245, 220, 0.564);  
+}
+
+

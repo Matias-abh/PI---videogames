@@ -1,0 +1,17 @@
+
+
+.cardsContainer {
+
+    /* background-color: #2B2D42; */
+    /* background-color: #00171F; */
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem 3rem;
+    width: 100%;
+    height: auto;
+
+
+    padding-top: 2rem;
+}

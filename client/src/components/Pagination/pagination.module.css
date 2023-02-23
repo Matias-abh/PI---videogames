@@ -1,0 +1,118 @@
+
+.pagination {
+    /* background-color: rgb(3, 42, 18); */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 10rem;
+    padding-left: 2rem;
+    /* border: 2px solid black; */
+}
+
+
+.filteredComp {
+    width: 100%;
+    height: 44%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+
+.btnPrev, .btnNext {
+    position: relative;
+    /* z-index: 0; */
+    cursor: pointer;
+    width: 4.8rem;
+    height: 4rem;
+    font-size: 1.8rem;
+    /* border: 2px solid black; */
+    border-radius: 4px;
+    margin: 0 .7rem;
+}
+
+
+.imgPrevBtn, .imgNextBtn {
+    position: absolute;
+    /* z-index: -5; */
+    pointer-events: none;
+    top: -.5rem;
+    /* top: .5rem; */
+    left: .7rem;
+    /* width: 4.4rem; */
+    height: auto;
+}
+    .disableBtns {
+        opacity: .6;
+        cursor: auto;
+    }
+
+.btnPrev img {
+    width: 70%;
+    height: auto;
+}
+
+.btnNext img {
+    width: 70%;
+    height: auto;
+    object-fit: cover;
+    /* margin-bottom: ; */
+    
+    transform: rotate(180deg);
+}
+
+
+
+
+.contNumPages {
+    background-color: yellowgreen;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48rem;
+    height: 6rem;
+    margin-left: 4.4rem;
+
+}
+
+.pagesBtns {
+    background-color: #7a2cbf00;
+    /* border: 1px solid black; */
+    width: 10rem;
+    height: 2.6rem;
+}
+
+
+.contArrayPages a {
+    cursor: pointer;
+
+
+    color: #fff;
+    font-size: 1.6rem;  
+    font-weight: 700;
+
+    border: 1px solid black;
+    border-radius: 4px;
+    /* padding: .48rem 1.2rem .26rem; */
+    padding: 1.1rem 1.7rem .8rem;
+
+    transition: background .3s;
+}
+
+/* .numPage {
+    background-color: aqua;
+    color: #fff;
+} */
+
+
+.currentNumPage {
+    background-color: #7B2CBF;
+}
+
+
+
+
+

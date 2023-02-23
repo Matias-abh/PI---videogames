@@ -1,0 +1,38 @@
+
+
+.home {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+
+    /* grid-template-columns: 20rem 1fr;  */
+    /* grid-auto-rows: 1fr 1fr; */
+
+    align-content: space-between
+}
+
+.orderedComp {
+    /* background-color: aqua; */
+    width: fit-content;
+    height: 0;
+}
+
+.paginationComp {
+    /* background-color: rgb(202, 22, 202); */
+    align-self: flex-end;
+    position: relative;
+    
+    right: 0;
+    width: 83%;
+    height: 10rem;
+}
+
+.cardsComp {
+    /* background-color: violet; */
+    align-self: flex-end;
+    position: relative;
+    
+    right: 0;
+    width: 100%;
+    height: 20rem;
+    }

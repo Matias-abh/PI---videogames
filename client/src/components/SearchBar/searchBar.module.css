@@ -1,0 +1,100 @@
+body {
+    overflow-x: hidden;
+}
+
+.searchBar {
+    /* position: absolute; */
+    /* background-color: rgb(224, 224, 64); */
+    width: 20rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+
+
+    animation-name: searchBar;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+    @keyframes searchBar {
+        from {
+            display: none;
+            margin-right: -20rem;
+        }
+        to {
+            display: flex;
+            margin-right: 0;
+        }
+    }
+
+
+
+.spreadInput {
+    background-color: #3F4850;
+    border: 1px solid #10002B;
+    border-radius: 24px;
+    width: 18rem;
+    height: 2.6rem;
+
+    display: flex;
+    align-items: center;
+    padding: .2rem .6rem 0 1.4rem;
+    /* padding-right: .6rem; */
+    /* padding-top: .2rem; */
+    transition: background .5s ease-in-out;
+}
+
+/* .spreadInput:hover .contInput input {
+    background-color: #fff;
+} */
+
+.contInput input {
+    background-color: #3F4850;
+    outline: none;
+    border-radius: 24px;
+
+    width: 100%;
+    height: 2.3rem;
+    font-size: 1.4rem;
+
+    /* border-radius: 40px; */
+    /* padding: 4px 0; */
+    /* padding-left: 1rem; */
+    transition: background .5s ease-in-out;
+}
+
+.spreadInput:hover .contInput input, .spreadInput:hover {
+    background-color: #fff;
+}
+
+
+.contInput {
+    width: 100%;
+    height: auto;
+}
+
+
+.contSearchIco img {
+    width: fit-content;
+    height: 1.6rem;
+    cursor: pointer;
+    transition: transform .18s;
+}   
+    .contSearchIco img:hover {
+        transform: scale(1.1);
+    }
+
+    
+
+::placeholder {
+    font-size: 1.4rem;
+}
+
+.contBtn button {
+    height: 2rem;
+    padding: 0 5px;
+    border: 1px solid black;
+    border-radius: 40px;
+    font-size: 1rem;
+}

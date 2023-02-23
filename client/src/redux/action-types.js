@@ -1,0 +1,8 @@
+export const GET_ALL_VIDEOGAMES = 'GET_ALL_VIDEOGAMES';
+export const VIDEOGAMES_SEARCH = 'VIDEOGAMES_SEARCH';
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const PREV_PAGE = 'PREV_PAGE';
+export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
+export const FILTER_BY_SOURCE = 'FILTER_BY_SOURCE';
+export const ORDER_ALPHA = 'ORDER_ALPHA';
+export const ORDER_BY_RATING = 'ORDER_BY_RATING';

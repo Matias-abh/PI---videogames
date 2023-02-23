@@ -1,0 +1,32 @@
+import { Link } from 'react-router-dom';
+import css from './card.module.css';
+
+
+const Card = ({ id, name, image, genres, rating }) => {
+
+    return (
+        <>
+            <Link className={css.linkCard} to={`/detail/${id}`} >
+                <div className={css.card} >
+                    <Link className={css.name} to={`/detail/${id}`} ><h2>{name}</h2></Link>
+
+                    <div className={css.contImg} >                    
+                        <img src={image} />
+                    </div>
+                    
+                    <div className={css.contRating} >
+                        <h3>Rating: {rating}</h3>
+                    </div>
+
+                    <div className={css.contGenres} >                
+                        <h3>Genres: {genres?.join(', ')}</h3>
+                    </div>
+
+                </div>
+            </Link>
+        </>
+    )
+};
+
+export default Card;
+
