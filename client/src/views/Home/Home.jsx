@@ -1,28 +1,33 @@
 import CardsContainer from '../../components/CardsContainer/CardsContainer.jsx';
-import Ordered from '../../components/Ordered/Ordered.jsx';
 import { getAllVideogames } from '../../redux/action-creators.js';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination/Pagination.jsx';
 
 import css from './home.module.css';
 
 const Home = () => {
     const dispatch = useDispatch();
+    const { allVGOriginal } = useSelector((state) => state);
 
     useEffect(() => {
-        dispatch(getAllVideogames());
+        if (!allVGOriginal.length) dispatch(getAllVideogames()) && console.log('se hizo el dispathc--->');
     }, [dispatch]);
+
+
+
+    // const resetCurrentPageOrdered = () => {
+    //     console.log('se ejcuto reset en HOme------>')
+    //     resetCurrentPageFromOrdered();
+    // }
+    
 
 
     return(
         <>
-            <div className={css.home} >                
-                <div className={css.orderedComp} >
-                    <Ordered />
-                </div>
+            <div className={css.home} >
                 <div className={css.paginationComp} >
-                    <Pagination />                    
+                    <Pagination />
                 </div>
                 <div className={css.cardsComp} >
                     <CardsContainer />                    

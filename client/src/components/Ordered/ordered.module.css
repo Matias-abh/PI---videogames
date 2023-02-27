@@ -1,13 +1,19 @@
 
 
-.contArrowMenu img {
+/* .contArrowMenu {
+} */
+
+
+.arrowMenu {
     position: fixed;
     z-index: 300;
-    top: 1.46rem;
-    left: .8rem;
-    width: 2.2rem;
-    height: auto;
+    top: 2rem;
+    left: 1.4rem;
+
+    width: 1.7rem;
+    height: fit-content;
     object-fit: cover;
+
     margin-right: .4rem;
     cursor: pointer;
     transition: transform .26s;
@@ -22,24 +28,50 @@
     /* transform: scale(1.06); */
 }
 
+
 .contTitle {
     /* position: relative;
     z-index: 300; */
-    background-color: black;
+    
+    /* background-color: rgba(0, 0, 0, 0); */
+    /* background-color: #240046; */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 10rem;
     height: 5rem;
+    margin-left: 4.3rem;
+    padding-bottom: 2px;
+
+    transition: transform .1s ease-in-out;
+}
+    .contTitle:hover {
+        transform: scale(1.04);
+    }
+    .contTitle:active {
+        transform: scale(.98);
+    }
+
+.contTitle h1 {
+    line-height: 2rem;
+    font-size: 2.8rem;
+    font-family: 'Caveat', cursive;
+    
 }
 
+.logoImg {
+    width: 3.4rem;
+    height: fit-content;
+    object-fit: cover;
+    transform: rotate(-20deg);
+    margin-top: .7rem;
+}
 .title {
     /* background-color: crimson; */
     text-decoration: none;
-    /* font-size: 1.2rem; */
     width: 8rem;
-    margin-left: -2.44rem;
     padding-top: 8px;
+    /* margin-right: 1.8rem; */
 
     /* transform: rotate(-5deg); */
 }

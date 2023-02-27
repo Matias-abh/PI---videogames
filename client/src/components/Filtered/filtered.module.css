@@ -2,40 +2,54 @@
 
 
 .filtered {
-    display: flex;
-    justify-content: flex-end;
-    width: 71%;
+    /* background-color: green; */
+    width: 100%;
     height: 10rem;
-
 
 }
 
 
 .contFilterOptions {
-    width: 40%;
+    /* background-color: yellow; */
+    width: 100%;
     height: 5rem;
+    display: flex;
+    justify-content: flex-end;
 
 }
+
 
 .contFilterBtn {
     background-color: #240046;
     position: relative;
     z-index: 50;
-    top: .2rem;
+    top: -.8rem;
+    right: .2rem;
 
+    align-self: flex-end;
     color: #fff;
     font-size: .9rem;
     
     cursor: pointer;
-    width: fit-content;
-    min-width: 92%;
+    width: 26rem;
     height: 4rem ;
 
     box-shadow: 0 0 5px black;
     
-    padding: 1.12rem 1rem 1.12rem 1.6rem;
+    /* padding: 1.12rem 1rem 1.12rem 1.6rem; */
+    padding: 1.3rem 1rem 0 1.6rem;
     border-radius: 4px;
+
+    transition: background .16s, transform .02s;
 }
+    .contFilterBtn:hover {
+        background-color: #3C096C;
+    }
+    .contFilterBtn:active {
+        transform: scale(.98);
+    }
+
+   
 
 .ulFilter {
     /* background-color: #59189adb; */
@@ -43,10 +57,9 @@
     cursor: pointer;
     position: absolute;
     z-index: 40;
-    /* top: -10rem;     */
-    
-    width: 20%;
     padding: 0;
+    
+    width: 26rem;
     border-radius: 4px;
     box-shadow: 8px 8px 18px black;
     
@@ -57,17 +70,19 @@
     animation: activeFilterOptions .36s forwards ease-out;
 
 }   
-@keyframes activeFilterOptions {
-        from {
-            top: -40rem;
-            opacity: 0;
+    @keyframes activeFilterOptions {
+            from {
+                top: -40rem;
+                opacity: 0;
+            }
+            to {
+                top: 4.4rem;
+                opacity: 1;
+            }
         }
-        to {
-            top: 4.4rem;
-            opacity: 1;
-        }
-    }
 
+
+   
 
 .contFilterOptions li {
     list-style: none;
@@ -86,3 +101,9 @@
     .activeFilterOpcions {
         display: block;
     }
+
+
+.selectGenreDefault {
+    color: rgba(128, 128, 128, 0.482);
+    letter-spacing: 1.4px;
+}

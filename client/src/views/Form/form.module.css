@@ -249,6 +249,7 @@ form {
     padding: 8px 12px;
     border-radius: 6px;
     transition: transform .24s, opacity .3s, box-shadow .24s ease-in-out;
+    
 }
 
     .contSubmitBtn button:hover {
@@ -259,7 +260,10 @@ form {
 
 
 
-
+.disabledSubmitButton {
+    opacity: .24;
+    pointer-events: none;
+}
 
 
 

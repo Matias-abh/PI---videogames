@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import validation from './validation.js';
 
 import css from './form.module.css';
@@ -7,9 +7,27 @@ import xIco from '../../assets/icons/xIco.png';
 import joystickIco from '../../assets/icons/joystickViolet.png';
 
 const Form = () => {
-    const [ form, setForm ] = useState({ name: '', image: '', description: '', platforms: [], released: '', rating: '0', genres: [] });
+    const [ form, setForm ] = useState({ name: '', image: '', description: '', platforms: [], released: '', rating: 0, genres: [] });
     const [ errors, setErrors ] = useState({});
 
+
+    useEffect(() => {
+        const submitButton = document.querySelector('#submitButton');
+            // if (Object.values(form)) {
+            // console.log('(Object.values(form)------->', (Object.values(form)));
+            const arrayForm = Object.values(form);
+
+            for (let input of arrayForm) {
+                if (input === '' || input == [].length) {
+                    submitButton.classList.add(css.disabledSubmitButton);
+                    submitButton.disabled = true;
+                    return;
+                } else {
+                    submitButton.disabled = false;
+                    submitButton.classList.remove(css.disabledSubmitButton);
+                };
+            };
+    }, [form]);
 
     const submitHandler = async (event) => {
         event.preventDefault();
@@ -158,7 +176,7 @@ const Form = () => {
                     </section>
 
                     <div className={css.contSubmitBtn} >                        
-                        <button type='submit' >Create Videogame</button>
+                        <button disabled='' type='submit' id='submitButton' >Create Videogame</button>
                     </div>
                 </form>
             </div>

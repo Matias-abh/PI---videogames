@@ -20,10 +20,7 @@ export const videogamesSearch = (gameName) => {
     return async (dispatch) => {
         try {
             const { data } = (await axios.get(`http://localhost:3001/videogames/test?name=${gameName}`));
-            return dispatch({
-                type: VIDEOGAMES_SEARCH,
-                payload: data,
-            });            
+            return dispatch({ type: VIDEOGAMES_SEARCH, payload: data });            
         } catch (error) {
             console.error(error);
         };

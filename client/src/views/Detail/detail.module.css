@@ -1,18 +1,322 @@
+/* html {
+    overflow-x: hidden;
+    overflow-y: hidden;
 
+} */
 
 .detail {
+    color: #fff;
+    /* background-color: aqua; */
     width: 100%;
-    height: 60rem;
-    background-color: aqua;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    /* overflow: hidden; */
+}
+
+
+
+.contImg {
+    
+    position: relative;
+    /* vertical-align: top; */
+    
+    width: 100%;
+    height: auto;
+}
+    .contImg::after {
+        /* background: radial-gradient(circle, rgba(255,255,255,0) 51%, rgba(0,0,0,1) 100%); */
+
+        background: radial-gradient(circle, rgba(255, 255, 255, 0) 24%, hsla(0, 0%, 0%, 1) 89%);
+
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+
+.contBackBtn {
+    /* background-color: red; */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    z-index: 120;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+}
+
+.contBackBtn button {
+    position: absolute;
+    top: .5rem;
+    right: -13.6rem;
+
+    background-color: black;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #fff;
+    padding: .6rem 3.2rem;
+    padding-right: 8rem;
+    border-radius: 12px;
+    border: 1px solid #7c7c7c;
+    margin-right: 1.8rem;
+    opacity: 0;
+
+    animation: backBtn 1.2s forwards;
+    transition: right .4s;
+}
+    .contBackBtn button:hover {
+        right: -6rem;
+    }
+    @keyframes backBtn {
+        to {
+            opacity: 1;
+        }
+    }
+
+.contBackBtn img {
+    position: absolute;
+    top: .55rem;
+    left: -5.8rem;
+    width: 100%;
+    height: 1.7rem;
+    object-fit: contain;
+}
+
+
+
+
+.gameImg {
+    position: relative;
+    top: -1rem;
+    /* height: 100%; */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+
+
+    transform: scale(1.2) translateX(5rem);
+
+    animation: imageBg 1.8s forwards;
+}
+    @keyframes imageBg {
+        from {
+            /* transform: scale(1.2); */
+            transform: scale(1.2) translateX(5rem);
+        }
+        to {
+            /* transform: scale(1) translateX(0); */
+            transform: none;
+        }
+    }
+
+
+.contName {
+    position: absolute;
+    z-index: 100;
+    top: 2.4rem;
+    left: -40rem;
+
+    font-size: 1.2rem;
+    color: #fff;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-top-right-radius: 40rem;
+    border-bottom-right-radius: 40rem; */
+
+    clip-path: polygon(0 0, 100% 1%, 88% 100%, 0 100%);
+    
+    /* background: linear-gradient(135deg, rgba(0, 0, 0, 0.698) 26%, rgba(37, 0, 71, 0.32) 72%); */
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.82) 13%, rgba(37, 0, 71, 0.566) 48%, rgba(255, 255, 255, 0) 100%);
+
+    padding: 0 2rem 0 1rem;
+    width: 50%;
+    height: 7.4rem;
+
+    animation-name: gameTitle;
+    animation-duration: 1.4s;
+    animation-fill-mode: forwards;
+}
+    @keyframes gameTitle {
+        to {
+            left: 0;
+        }
+    }
+
+
+.contRatingrReleased {
+    /* background-color: blue; */
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 7rem;
+    top: 0;
+
+
+    font-size: 1rem;
+    color: #fff;
+
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    
+}
+
+.rating, .released {
+    position: relative;   
+    width: 20rem;
+    display: inline-block;
+    /* background-color: crimson; */
+    text-align: left;
+    padding: .4rem 0;
+}
+
+
+.rating {
+    right: -20rem;
+    animation: ratingReleased 1.4s forwards;
+}
+.released {
+    right: -20rem;
+    animation: ratingReleased 1.4s .2s forwards;
+}
+    /* @keyframes rating {
+        to {
+            right: 0;
+        }
+    } */
+    @keyframes ratingReleased {
+        to {
+            right: 0;
+        }
+    }
+
+
+.contGenres {
+    position: absolute;
+    z-index: 100;
+    top: 10rem;
+    left: -40rem;
+
+    display: flex;
+    justify-content: center;
     align-items: center;
 
+    /* background-color: rgba(238, 130, 238, 0.313); */
+    /* width: 100%; */
+    /* height: fit-content; */
+
+
+    clip-path: polygon(0 0, 100% 1%, 92.6% 100%, 0 100%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.82) 13%, rgba(37, 0, 71, 0.566) 48%, rgba(255, 255, 255, 0) 100%);
+    padding: 0 2rem 0 1rem;
+    width: 47%;
+    height: 4.6rem;
+
+    animation: genres 1.4s .2s forwards;
+}
+    @keyframes genres {
+        to {
+            left: 0;
+        }
+    }
+
+
+.contPlatforms {
+    position: absolute;
+    z-index: 100;
+
+
+    top: 26.4rem;
+    background-color: rgba(0, 0, 0, 0.628);
+    padding: 1rem;
+    padding-left: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    height: fit-content;
+
+    opacity: 0;
+    animation: platformsDescription 2s .2s forwards;
 }
 
-.detail img {
-    width: 54%;
-    height: auto;
-    object-fit: cover;
 
+
+
+
+
+.contDescription {
+    position: absolute;
+    z-index: 100;
+    /* bottom: 2rem; */
+    top: 30rem;
+
+    font-size: 1.2rem;
+    /* text-align: center; */
+
+    background-color: rgba(0, 0, 0, 0.628);
+    padding: 1.4rem 2rem;
+    border-radius: 12px;
+    width: 100%;
+    height: fit-content;
+    /* margin-top: 0rem; */
+
+    opacity: 0;
+    animation: platformsDescription 2s forwards;
 }
+    @keyframes platformsDescription {
+        to {
+            opacity: 1;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* media queries */
+    
+    
+    @media (max-width: 1360px) {
+        .contDescription {            
+            top: 20rem;
+        }
+
+        .contPlatforms {
+            top: 16.4rem;
+        }
+    }
+
+
+    @media (min-width: 1680px) {
+        .contDescription {   
+            top: 44rem;
+        }
+
+        .contPlatforms {
+            top: 40.4rem;
+        }
+    }

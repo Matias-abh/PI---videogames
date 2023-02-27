@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const CardsContainer = () => {
 
     const { allVideogames } = useSelector((state) => state);
-    const pageVideogames = allVideogames.slice(0, 15);
+    const videogamesPage = allVideogames.slice(0, 15);
     
     // const allPlatforms = []; 
     // allVideogames.map((game) => {
@@ -22,7 +22,8 @@ const CardsContainer = () => {
         <>
             <div className={css.cardsContainer} >                
                 {
-                    pageVideogames?.map((game) => {
+                    allVideogames.length 
+                    ? videogamesPage?.map((game) => {
                         return (
                             <Card
                                 key={game.id}
@@ -34,6 +35,7 @@ const CardsContainer = () => {
                             />
                         )
                     })
+                    : <h2 style={{color: '#fff'}} > no videogame matches </h2>
                 }
             </div>
         </>

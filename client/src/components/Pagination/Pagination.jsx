@@ -2,20 +2,21 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextPage, prevPage } from "../../redux/action-creators";
 import Filtered from "../Filtered/Filtered";
+import Ordered from "../Ordered/Ordered";
 
 import css from './pagination.module.css';
 import pagesBtn from '../../assets/icons/pagesBtn.png';
+import goUpIco from '../../assets/icons/goUpIco.png';
 
 const Pagination = () => {
     const dispatch = useDispatch();
-    const { allVideogamesCopy } = useSelector((state) => state);
-    const [ currentPage, setCurrentPage ] = useState(1);
-    const [ firstIndexOfPage, setFirstIndexOfPage ] = useState(15);
+    const { allVideogamesCopy, allVGOriginal } = useSelector((state) => state);
+    const [ currentPage, setCurrentPage ] = useState(parseInt(window.sessionStorage.getItem('currentPage')) || 1);
     const gamesPerPage = 15;
+
     const totalPages = Math.ceil(allVideogamesCopy.length / gamesPerPage);
     const totalPagesArr = [];
     for (let i = 0; i < totalPages; i++) totalPagesArr.push(i + 1);
-
 
     useEffect(() => {
         const btnPrev = document.querySelector('#prevBtn');
@@ -27,44 +28,61 @@ const Pagination = () => {
         currentPage === (totalPagesArr.length) ? btnNext.classList.add(css.disableBtns) : btnNext.classList.remove(css.disableBtns)
 
     }, [currentPage, allVideogamesCopy]);
+    
+    useEffect(() => {
+        const goUpBtn = document.querySelector('#goUpBtn');
+        window.onscroll = () => window.scrollY < 300 ? goUpBtn?.classList?.remove(css.activeGoUpBtn) : goUpBtn?.classList?.add(css.activeGoUpBtn);
+    }, []);
+    
+    
+    useEffect(() => {
+        window.sessionStorage.setItem('currentPage', currentPage);
+    }, [currentPage]);
 
-    useEffect(()=> {
-        setCurrentPage(1)
-    }, [allVideogamesCopy]);
 
+
+    const prevPageHandler = () => {
+        dispatch(prevPage(gamesPerPage * (currentPage - 1)));
+        setCurrentPage(currentPage - 1);
+    };
 
     const nextPageHandler = () => {
+        dispatch(nextPage(gamesPerPage * currentPage));
         setCurrentPage(currentPage + 1);
-        setFirstIndexOfPage(firstIndexOfPage + gamesPerPage);
-        dispatch(nextPage(firstIndexOfPage));        
-    };
+    };    
     
-    const prevPageHandler = () => {
-        setCurrentPage(currentPage - 1);
-        setFirstIndexOfPage(firstIndexOfPage - gamesPerPage);
-        dispatch(prevPage(gamesPerPage * (currentPage-1)));
-    };
 
     const numPagesHandler = (event) => {
         const numPage = event.target.name;
         setCurrentPage(parseInt(numPage));
         if (numPage === currentPage) return;
-        if (numPage < currentPage) return dispatch(prevPage(numPage * gamesPerPage));
-        if (numPage > currentPage) return dispatch(nextPage((numPage - 1) * gamesPerPage));
+        if (numPage < currentPage) {
+            dispatch(prevPage(gamesPerPage * numPage));
+        }
+        else if (numPage > currentPage) {
+            dispatch(nextPage(gamesPerPage * (numPage - 1)));
+        };
     };
 
-   const arrayPages = totalPagesArr?.map((page, idx) => <a className={`${currentPage === page ? css.currentNumPage : false}`} name={page} onClick={numPagesHandler} key={idx} >{page}</a>)
 
-
+    const arrayPages = totalPagesArr?.map((page, idx) => <a className={`${currentPage === page ? css.currentNumPage : css.numPages}`} name={page} onClick={numPagesHandler} key={idx} >{page}</a>)
 
     const resetCurrentPage = () => {
         setCurrentPage(1);
-        setFirstIndexOfPage(15);
     };
+
+    const goUpHandler = () => {
+        window.scrollTo(0, 0);
+    };
+    
+    
 
 
     return (
         <>
+            <div className={css.orderedComp} >
+                <Ordered  resetCurrentPage={resetCurrentPage} />
+            </div>
             <div className={css.pagination} >
                 
                 <div className={css.filteredComp} >
@@ -78,8 +96,9 @@ const Pagination = () => {
 
                     <button disabled='' className={`${css.btnNext} ${css.pagesBtns}`} onClick={nextPageHandler} id='nextBtn' ><img src={pagesBtn} className={css.imgNextBtn} /></button>
                 </div>
-
-
+                <div className={`${css.contGoUpBtn} `} id='goUpBtn' onClick={goUpHandler} >
+                    <div><img src={goUpIco} className={css.goUpBtn} /></div>                
+                </div>
             </div>
             
         </>

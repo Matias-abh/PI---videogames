@@ -1,12 +1,17 @@
+html {
+    scroll-behavior: smooth;
+}
 
 .pagination {
-    /* background-color: rgb(3, 42, 18); */
+    /* background-color: rgb(191, 150, 27); */
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
     width: 100%;
     height: 10rem;
-    padding-left: 2rem;
+    /* padding-left: 2rem; */
     /* border: 2px solid black; */
+    
 }
 
 
@@ -24,57 +29,69 @@
     position: relative;
     /* z-index: 0; */
     cursor: pointer;
-    width: 4.8rem;
+    width: 2rem;
+
     height: 4rem;
     font-size: 1.8rem;
-    /* border: 2px solid black; */
     border-radius: 4px;
-    margin: 0 .7rem;
+    /* border: 2px solid rgba(222, 203, 203, 0.802); */
+
+    /* display: flex;
+    justify-content: center; */
+
+    /* margin: 0 .7rem; */
+    transition: transform .04s;
 }
+    .btnPrev:active, .btnNext:active {
+        transform: scale(.94);
+    }
+
+    /* .btnPrev:hover, .btnNext:hover {
+        transform: scale(1.1);
+    } */
 
 
 .imgPrevBtn, .imgNextBtn {
-    position: absolute;
+    position: relative;
     /* z-index: -5; */
     pointer-events: none;
-    top: -.5rem;
-    /* top: .5rem; */
-    left: .7rem;
-    /* width: 4.4rem; */
-    height: auto;
+    top: -.8rem;
+    left: 0;
+    /* left: -17.9rem; */
+    /* left: 1.4rem; */
+
+    width: 100%;
+    height: 4rem;
+    object-fit: contain;
 }
     .disableBtns {
-        opacity: .6;
+        opacity: .4;
         cursor: auto;
+        /* transform: none; */
     }
 
-.btnPrev img {
-    width: 70%;
-    height: auto;
-}
+/* .btnPrev img {
+} */
 
 .btnNext img {
-    width: 70%;
-    height: auto;
-    object-fit: cover;
-    /* margin-bottom: ; */
-    
-    transform: rotate(180deg);
+   transform: rotate(180deg);
 }
 
 
 
 
 .contNumPages {
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
     
     display: flex;
     align-items: center;
     justify-content: center;
+    align-self: flex-end;
 
-    width: 48rem;
-    height: 6rem;
-    margin-left: 4.4rem;
+    width: 100%;
+    height: 4rem;
+    padding: 1rem 0;
+    margin-top: 1.8rem;
 
 }
 
@@ -86,21 +103,22 @@
 }
 
 
-.contArrayPages a {
-    cursor: pointer;
+/* .contArrayPages a { */
+    /* cursor: pointer; */
 
 
-    color: #fff;
+    /* color: #ffffff95; */
+
+    /* color: gray;
     font-size: 1.6rem;  
     font-weight: 700;
 
-    border: 1px solid black;
+    border: 1px solid #ffffff1d;
     border-radius: 4px;
-    /* padding: .48rem 1.2rem .26rem; */
     padding: 1.1rem 1.7rem .8rem;
 
-    transition: background .3s;
-}
+    transition: all .3s; */
+/* } */
 
 /* .numPage {
     background-color: aqua;
@@ -108,11 +126,95 @@
 } */
 
 
+/* .contArrayPages {
+    margin: 0 10rem;
+} */
+
+
+.numPages {
+    cursor: pointer;
+
+
+    /* color: #ffffff95; */
+
+    color: gray;
+    font-size: 1.6rem;  
+    font-weight: 700;
+
+    border: 1px solid #ffffff1d;
+    border-radius: 4px;
+    padding: 1.1rem 1.7rem .8rem;
+
+    transition: background .14s, color .14s, opacity .1s ease-in;
+}
+    .numPages:hover {
+        background-color: #ffffff36;
+        opacity: .6;
+    }
+
 .currentNumPage {
-    background-color: #7B2CBF;
+    background-color: #3C096C;
+    color: #fff;
+    font-size: 1.6rem;  
+    font-weight: 700;
+
+    border: 1px solid #240046;
+    border-radius: 4px;
+    padding: 1.1rem 1.7rem .8rem;
+
 }
 
 
+.contGoUpBtn {
+    background-color: #121212;
+    position: fixed;
+    z-index: 500;
+
+    cursor: pointer;
+
+    bottom: 1.3rem;
+    right: 2rem;
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(8rem) rotate(-220deg);
+    transition: transform .4s;
+    
+}
+
+.goUpBtn {
+    width: 2rem;
+    height: fit-content;
+    object-fit: cover;
+}
+    .activeGoUpBtn {
+        transform: none;
+    }
 
 
 
+
+
+
+
+/* 
+.contFooterPagination {
+    background-color: beige;
+    position: relative;
+    z-index: 300;
+
+    top: 400vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48rem;
+    height: auto;
+    padding: 1rem 0;
+    margin-left: 4.4rem;
+
+    margin-bottom: 0;
+} */

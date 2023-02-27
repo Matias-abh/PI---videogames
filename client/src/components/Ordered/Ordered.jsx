@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { orderAlpha, orderByRating } from "../../redux/action-creators";
-
-import css from './ordered.module.css';
-import arrowDown from '../../assets/icons/arrowDown.png';
-import arrowMenu from '../../assets/icons/arrowViolet.png';
 import { useDispatch } from 'react-redux';
 
-const Ordered = () => {
+import css from './ordered.module.css';
+import joystickIco from '../../assets/icons/joystickViolet.png';
+import arrowDown from '../../assets/icons/arrowDown.png';
+import arrowMenu from '../../assets/icons/arrowViolet.png';
+
+const Ordered = ({ resetCurrentPage }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
         const arrowMenu = document.querySelector('#arrowMenu');
         const orderedMenu = document.querySelector('#orderedMenu');
         const ulOrderList = document.querySelectorAll('.ulOrder');
-
         const alphaBtn = document.querySelector('#alphaBtn');
         const ulAlpha = document.querySelector('#ulAlpha')
         const ratingBtn = document.querySelector('#ratingBtn');
@@ -43,13 +43,12 @@ const Ordered = () => {
             ulRating.classList.toggle(css.extendedUl);
             arrowRating.classList.toggle(css.closeUl);
         });
-
-
     }, []);
 
 
     const orderHandler = (event) => {
         const order = event.target.textContent;
+        resetCurrentPage();
         if (order === 'A to Z' || order === 'Z to A') return dispatch(orderAlpha(order));
         else return dispatch(orderByRating(order));
     };
@@ -58,13 +57,14 @@ const Ordered = () => {
     return (
         <>  
             <div className={css.contArrowMenu} >                            
-                <img src={arrowMenu} id='arrowMenu' />
+                <img src={arrowMenu} className={css.arrowMenu} id='arrowMenu' />
             </div>
 
             <div className={css.ordered} id='orderedMenu' >
 
                     <div className={css.contTitle} >
-                        <Link to='/home' className={css.title} ><h1>Micchi-Games</h1></Link>
+                        <img src={joystickIco} className={css.logoImg} />
+                        <Link to='/home' className={css.title} ><h1>Video-Games</h1></Link>
                     </div>
 
                 <div className={css.contOrderAlpha} >

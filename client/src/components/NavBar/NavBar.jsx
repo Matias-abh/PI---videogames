@@ -4,6 +4,7 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 import { getAllVideogames, filterBySource } from '../../redux/action-creators.js';
 
 import css from './navBar.module.css';
+import joystickIco from '../../assets/icons/joystickViolet.png';
 
 
 const NavBar = () => {
@@ -15,27 +16,28 @@ const NavBar = () => {
         dispatch(filterBySource(source));
     };
 
-const resetHome = () => {
-    dispatch(getAllVideogames());
-};
+// const resetHome = () => {
+//     dispatch(getAllVideogames());
+// };
 
 
     return (
         <>  
             <div className={css.navBar}>
                 <div className={css.contNav} >                    
-                    <div className={css.contTitle} >                    
-                        <Link to='/home' className={css.title} ><h1>Micchi-Games</h1></Link>
+                    <div className={css.contTitle} >
+                        <img src={joystickIco} className={css.logoImg} />           
+                        <Link to='/home' className={css.title} ><h1>Video-Games</h1></Link>
                     </div>
                     <div className={css.contLinks} >
-                        <Link className={`${css.link} ${css.linkHome}`} to='/home' onClick={resetHome} >Home</Link>
+                        <Link className={`${css.link} ${css.linkHome}`} to='/home' >Home</Link>
 
                         <div className={css.contMenuOrigin} >                            
                             <Link className={`${css.link} ${css.linkVgOrigin}`} to='/home' >Videogame origin</Link>
                                 <ul className={css.subMenu} >
-                                    <li onClick={gamesSourceHandler}  >All videogames</li>
-                                    <li onClick={gamesSourceHandler}  >API videogames</li>
-                                    <li onClick={gamesSourceHandler}  >Created videogames</li>
+                                    <li onClick={gamesSourceHandler} >All videogames</li>
+                                    <li onClick={gamesSourceHandler} >API videogames</li>
+                                    <li onClick={gamesSourceHandler} >Created videogames</li>
                                 </ul>             
                         </div>
 

@@ -1,4 +1,4 @@
-import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, NEXT_PAGE, PREV_PAGE, FILTER_BY_GENRE, FILTER_BY_SOURCE, ORDER_ALPHA, ORDER_BY_RATING } from './action-types.js';
+import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, PREV_PAGE, NEXT_PAGE, FILTER_BY_GENRE, FILTER_BY_SOURCE, ORDER_ALPHA, ORDER_BY_RATING } from './action-types.js';
 
 const initialState = {
     allVGOriginal: [],
@@ -23,69 +23,63 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 allVideogames: payload,
                 allVideogamesCopy: payload,
             };        
+
         
+        case PREV_PAGE:
+            return { ...state, allVideogames: state.allVideogamesCopy.slice(payload - 15)
+            };
+
 
         case NEXT_PAGE:
             return { ...state, allVideogames: state.allVideogamesCopy.slice(payload)}
 
 
-        case PREV_PAGE:
-            return { ...state, allVideogames: state.allVideogamesCopy.slice(payload - 15),
-            };
 
 
         case FILTER_BY_GENRE:
             if (payload === 'None') return { ...state, allVideogames: state.allVGOriginal, allVideogamesCopy: state.allVGOriginal };
-            
-            state.allVideogames = state.allVGOriginal.filter((game) => {
-                return game.genres.find((genre) => genre === payload)
-            })
-            
-        return {
-            ...state,
-            allVideogames: state.allVideogames,
-            allVideogamesCopy: state.allVideogames,
-        };
+                        
+            const filteredVideogames = state.allVGOriginal.filter((game) => game.genres.find((genre) => genre === payload));        
+            return { ...state, allVideogames: filteredVideogames, allVideogamesCopy: filteredVideogames };
 
         case FILTER_BY_SOURCE:
 
-        if (payload === 'API videogames') {
-            state.allVideogames = state.allVGOriginal.filter((game) => game.created === false);
-            return {...state, allVideogames: state.allVideogames, allVideogamesCopy: state.allVideogames }
-        }        
-        if (payload === 'Created videogames') {
-            state.allVideogames = state.allVGOriginal.filter((game) => game.created === true)
-            return {...state, allVideogames: state.allVideogames, allVideogamesCopy: state.allVideogames }
-        }
-        return { ...state, allVideogames: state.allVGOriginal, allVideogamesCopy: state.allVGOriginal };
+            if (payload === 'API videogames') {
+                state.allVideogames = state.allVGOriginal.filter((game) => game.created === false);
+                return {...state, allVideogames: state.allVideogames, allVideogamesCopy: state.allVideogames }
+            }        
+            if (payload === 'Created videogames') {
+                state.allVideogames = state.allVGOriginal.filter((game) => game.created === true)
+                return {...state, allVideogames: state.allVideogames, allVideogamesCopy: state.allVideogames }
+            }
+            return { ...state, allVideogames: state.allVGOriginal, allVideogamesCopy: state.allVGOriginal };
             
 
         case ORDER_ALPHA:
 
             if (payload === 'A to Z') {
-                state.allVideogames = state.allVideogamesCopy.sort((a, b) => a.name < b.name ? -1 : 1);
-                return { ...state, allVideogames: state.allVideogames, allVideogamesCopy: [ ...state.allVideogames ] 
-                }; 
+                const orderedVideogames = state.allVideogamesCopy.sort((a, b) => a.name < b.name ? -1 : 1);
+                const allVGOrdered = state.allVGOriginal.sort((a, b) => a.name < b.name ? -1 : 1);
+                return { ...state, allVideogames: orderedVideogames, allVideogamesCopy: orderedVideogames, allVGOriginal: allVGOrdered }; 
             };
             if (payload === 'Z to A') {
                 state.allVideogames = state.allVideogamesCopy.sort((a, b) => b.name < a.name ? -1 : 1);
-                return { ...state, allVideogames: state.allVideogames, allVideogamesCopy: [ ...state.allVideogames ]
-                };
+                state.allVGOriginal = state.allVGOriginal.sort((a, b) => b.name < a.name ? -1 : 1);
+                return { ...state, allVideogames: state.allVideogames, allVideogamesCopy: state.allVideogames, allVGOriginal: state.allVGOriginal };
             };
             
             
-            case ORDER_BY_RATING:
-                if (payload === 'Lowest rating') {
-                    state.allVideogames = state.allVideogamesCopy.sort((a, b) => a.rating - b.rating);
-                    return { ...state, allVideogames: state.allVideogames, allVideogamesCopy: [ ...state.allVideogames ]
-                    };
-                };
-                if (payload === 'Highest rating') {
-                    state.allVideogames = state.allVideogamesCopy.sort((a, b) => b.rating - a.rating);
-                    return { ...state, allVideogames: state.allVideogames, allVideogamesCopy: [ ...state.allVideogames ]
-                    };
-                };
-
+        case ORDER_BY_RATING:
+            if (payload === 'Lowest rating') {
+                const orderedVideogames = state.allVideogamesCopy.sort((a, b) => a.rating - b.rating);
+                const allVGOrdered = state.allVGOriginal.sort((a, b) => a.rating - b.rating);
+                return { ...state, allVideogames: orderedVideogames, allVideogamesCopy: orderedVideogames, allVGOriginal: allVGOrdered };
+            };
+            if (payload === 'Highest rating') {
+                const orderedVideogames = state.allVideogamesCopy.sort((a, b) => b.rating - a.rating);
+                const allVGOrdered = state.allVGOriginal.sort((a, b) => b.rating - a.rating);
+                return { ...state, allVideogames: orderedVideogames, allVideogamesCopy: orderedVideogames, allVGOriginal: allVGOrdered };
+            };
         
         
         default:
@@ -94,6 +88,32 @@ const rootReducer = (state = initialState, { type, payload }) => {
 };
 
 export default rootReducer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -149,3 +169,14 @@ export default rootReducer;
         //     console.log('entro al if en prev reducer---->',  state.allVideogames)
         //     return { ...state, allVideogames: state.allVideogamesCopy.slice(payload - 15)}
         // };
+
+
+
+// ordenamiento con método localeCompare() dentro la función de comparación del método sort():
+// if (payload === 'A to Z') {
+//     state.allVideogames = state.allVideogamesCopy.sort((itemA, itemB) => {
+//         return itemA.name.localeCompare(itemB.name);
+//     });
+//     return { ...state, allVideogames: state.allVideogames, allVideogamesCopy: [ ...state.allVideogames ] 
+//     }; 
+// };
