@@ -24,10 +24,10 @@
 
 /* ➥ */
 /* 🡕 */
-/* ➛ */
 /* 🡺 */
-/* ⤤ */
 /* ➜ */
+/* ⤤ */
+/* ➛ */
     .card::before {
         content: 'See more details about this game ⤤';
         font-size: 1.4rem;

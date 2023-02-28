@@ -23,10 +23,10 @@ const getAllVideogamesHandler = async (req, res) => {
 
 const getVideogameDetailsHandler = async (req, res) => {
     const { idVideogame } = req.params;
-    if (!idVideogame) throw Error('Id not received');
-    const from = isNaN(idVideogame) ? 'database' : 'API';
-
+    
     try {
+        if (!idVideogame) throw Error('Id not received');
+        const from = isNaN(idVideogame) ? 'database' : 'API';
         const videogameDetails = await getVideogameDetails(idVideogame, from);
         res.status(200).json(videogameDetails)
     } catch (error) {

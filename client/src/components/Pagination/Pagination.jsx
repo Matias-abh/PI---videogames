@@ -18,6 +18,7 @@ const Pagination = () => {
     const totalPagesArr = [];
     for (let i = 0; i < totalPages; i++) totalPagesArr.push(i + 1);
 
+
     useEffect(() => {
         const btnPrev = document.querySelector('#prevBtn');
         const btnNext = document.querySelector('#nextBtn');

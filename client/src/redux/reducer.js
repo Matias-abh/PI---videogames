@@ -35,7 +35,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
 
 
-
         case FILTER_BY_GENRE:
             if (payload === 'None') return { ...state, allVideogames: state.allVGOriginal, allVideogamesCopy: state.allVGOriginal };
                         

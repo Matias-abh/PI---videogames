@@ -18,6 +18,40 @@
     
 }
 
+.contVideogamesImages {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+    width: 100vw;
+    height: 100vh;
+    opacity: .6;
+    
+    animation: videogameImages 30s infinite alternate ease-in-out;
+}
+    @keyframes videogameImages {
+        to {
+            margin-left: -142rem;
+        }
+    }
+
+.contVideogamesImages img {
+    width: 10rem;
+    height: 14rem;
+    object-fit: cover;
+
+}
+
+
+.overlayImages {
+    background: radial-gradient(circle, rgba(14,9,19,0) 38%, rgba(0,0,0,1) 91%);
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+}
+
 /* .closeLanding {
     animation: closeLanding 5s;
 }
@@ -92,15 +126,17 @@
 
 
 .contLogoJoystick {
-    /* background-color: rgba(238, 130, 238, 0.537); */
-    width: 100%;
-    height: 16rem;
+    /* background-color: rgba(0, 0, 0, 0.408); */
+    width: min-content;
+    height: fit-content;
     position: absolute;
     z-index: 30;
 
     cursor: pointer;
 
-    padding-left: 26rem;
+    border-radius: 12px;
+    margin-left: 52rem;
+    margin-bottom: 14rem;
 
     display: flex;
     justify-content: center;
@@ -117,23 +153,28 @@
     min-width: 250px;
     height: 10rem;
     object-fit: contain;
+    filter: drop-shadow(0px 7px 21px black);
     
-    transform: rotate(5deg) scale(1.14);
-    animation: logoJoystick 2s infinite alternate;
+    /* transform: rotate(5deg) scale(1.14); */
+    animation: logoJoystick 4s infinite alternate;
 }
     @keyframes logoJoystick {
-            to {
-                transform: scale(.96);
-            }
+        from {
+            transform: rotateY(180deg);
         }
+        to { 
+            transform: rotateY(-180deg);
+        }
+    }
 
 
 
 .contBtnHome {
     /* background-color: rgba(238, 130, 238, 0.364); */
     position: absolute;
+    z-index: 120;
 
-    /* padding-right: 0rem; */
+    margin-top: 2.6rem;
     width: 100%;
     height: 16rem;
 
@@ -148,18 +189,26 @@
     z-index: 50;
     background-color: #10002B;
     font-size: 2.2rem;
+    text-decoration: none;
     border: 1px solid #aaa;
     border-radius: 12px;
-    padding: 1.6rem 2.4rem;
-    text-decoration: none;
+    padding: 1.2rem 2rem;
     display: flex;
     align-items: center;
     opacity: .82;
     overflow: hidden;
 
-    transition: all .05s;
+    transition: all .4s;
     animation: btnHome 2s ease-in infinite alternate;    
 }
+    .btnHome:hover {
+        background-color: #3c096cdd;
+        /* box-shadow: 0 0 10px #9D4EDD, 0 0 40px #9D4EDD, 0 0 80px #9D4EDD; */
+    }
+    .btnHome:active {        
+        transform: scale(.96);
+    }
+
     @keyframes btnHome {
         to {
             transform: scale(1.06);
@@ -167,18 +216,6 @@
             opacity: 1;
         }
     }
-
-    .btnHome:hover {
-        /* background-color: #9D4EDD; */
-        /* opacity: .5; */
-        box-shadow: 0 0 10px #9D4EDD, 0 0 40px #9D4EDD, 0 0 80px #9D4EDD;
-    }
-    .btnHome:active {        
-        transform: scale(.96);
-    }
-
-
-
 
 
 
@@ -280,19 +317,20 @@
 
     /* media queries */
 
-    /* @media (min-width: 1600px) {
-        .contWelcome {
+    @media (min-width: 1600px) {
+        /* .contWelcome {
             background-color: red;
             top: 11rem;
         }
         
         .contBtnHome {
             top: 19rem
-        }
+        } */
         
         .contLogoJoystick {
+            margin-left: 58rem;
         }
-    } */
+    }
 
 
 

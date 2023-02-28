@@ -10,18 +10,10 @@ const Home = () => {
     const dispatch = useDispatch();
     const { allVGOriginal } = useSelector((state) => state);
 
-    useEffect(() => {
-        if (!allVGOriginal.length) dispatch(getAllVideogames()) && console.log('se hizo el dispathc--->');
-    }, [dispatch]);
-
-
-
-    // const resetCurrentPageOrdered = () => {
-    //     console.log('se ejcuto reset en HOme------>')
-    //     resetCurrentPageFromOrdered();
-    // }
     
-
+    useEffect(() => {
+        if (!allVGOriginal.length) dispatch(getAllVideogames());
+    }, [dispatch]);
 
     return(
         <>

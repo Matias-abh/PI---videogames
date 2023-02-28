@@ -1,52 +1,69 @@
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import validation from './validation.js';
+import { Link } from 'react-router-dom';
 
 import css from './form.module.css';
 import xIco from '../../assets/icons/xIco.png';
 import joystickIco from '../../assets/icons/joystickViolet.png';
+import xError from '../../assets/icons/xError.png';
 
 const Form = () => {
     const [ form, setForm ] = useState({ name: '', image: '', description: '', platforms: [], released: '', rating: 0, genres: [] });
     const [ errors, setErrors ] = useState({});
-
+    const [ backSuccessResponse, setSuccessBackResponse ] = useState('');
+    const [ backErrorResponse, setBackErrorResponse ] = useState('');
+    const { allVGOriginal } = useSelector((state) => state);    
 
     useEffect(() => {
         const submitButton = document.querySelector('#submitButton');
-            // if (Object.values(form)) {
-            // console.log('(Object.values(form)------->', (Object.values(form)));
-            const arrayForm = Object.values(form);
+        const arrayForm = Object.values(form);        
 
-            for (let input of arrayForm) {
-                if (input === '' || input == [].length) {
-                    submitButton.classList.add(css.disabledSubmitButton);
-                    submitButton.disabled = true;
-                    return;
-                } else {
-                    submitButton.disabled = false;
-                    submitButton.classList.remove(css.disabledSubmitButton);
-                };
+        for (let input of arrayForm) {
+            if (input === '' || input == [].length || Object.keys(errors).length > 0) {
+                submitButton.classList.add(css.disabledSubmitButton);
+                submitButton.disabled = true;
+                return;
+            } else {
+                submitButton.disabled = false;
+                submitButton.classList.remove(css.disabledSubmitButton);
             };
+        };
     }, [form]);
 
+    
     const submitHandler = async (event) => {
         event.preventDefault();
-        // await axios.post(`http://localhost:3001/videogames/test`, form);
-        console.log('game created successfully');
 
-        // EVALUAR SI NO HAY NADA EN ERRROR Y SI ESTA TODO OK EN EL FORM
-        // EN ESE CASO, SE ENVÍAN LOS DATOS Y SE CREA EL VIDEOGAME
-        // (ventana flotante buscale la vuelta)
+        const response = allVGOriginal?.find((videogame) => videogame.name.toLowerCase().includes(form.name.toLowerCase()));
+
+        if (!response) {
+            try {
+                const response = await axios.post(`http://localhost:3001/videogames/test`, form);
+                if (response.status !== 200) throw new Error(response);
+                else setSuccessBackResponse(response.data);
+            } catch (error) {
+                setBackErrorResponse(error.response.data.error);
+            };       
+        } else {
+            setBackErrorResponse('Error: the game you are trying to create already exists');
+        };
+
+
+
+        const modalSubmit = document.querySelector('#modalSubmit');
+        modalSubmit.classList.add(css.modalDisplay);
+        modalSubmit.showModal();
+        setForm({ name: '', image: '', description: '', platforms: [], released: '', rating: 0, genres: [] });
     };
+
 
     const inputChangeHandler = (event) => {
         const { name, value } = event.target;
         setForm({ ...form, [name]: value });
         setErrors(validation({ ...form, [name]: value }));
     };
-
-
-
 
     const inputGendersHandler = (event) => {
         const { value } = event.target;
@@ -181,6 +198,13 @@ const Form = () => {
                 </form>
             </div>
         </div>
+
+        <dialog id='modalSubmit' className={css.modalSubmit} >
+            {backSuccessResponse && <img src={joystickIco} /> || backErrorResponse && <img src={xError} /> }
+            {backSuccessResponse && <h1>Great!</h1> || backErrorResponse && <h1>Something went wrong!</h1> }
+            {backSuccessResponse && <h2>{backSuccessResponse}</h2> || backErrorResponse && <h2>{backErrorResponse}</h2> }
+            <Link to='/home' className={css.linkToHomeModal} ><div className={css.btnHomeModal} >Back to Home</div></Link>
+        </dialog>
         </>
     )
 };

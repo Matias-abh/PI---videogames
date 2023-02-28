@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import { getAllVideogames, filterBySource } from '../../redux/action-creators.js';
@@ -10,15 +11,20 @@ import joystickIco from '../../assets/icons/joystickViolet.png';
 const NavBar = () => {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
+  
+    const [ currentPage, setCurrentPage ] = useState(window.sessionStorage.getItem('currentPage'));
+
+
 
     const gamesSourceHandler = (event) => {
         const source = event.target.textContent;
+        window.sessionStorage.setItem('currentPage', 1);
         dispatch(filterBySource(source));
+        // window.location.reload();
+        window.location.pathname = '/';
+        window.location.pathname = '/home';
     };
 
-// const resetHome = () => {
-//     dispatch(getAllVideogames());
-// };
 
 
     return (

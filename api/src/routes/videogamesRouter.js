@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const videogamesRouter = Router();
 const { getAllVideogamesHandler, getVideogameDetailsHandler, getVideogamesQueryHandler, postVideogameHandler } = require('../handlers/videogamesHandler.js');
+
 const validatePostVg = (req, res, next) => {
     const { name, description, platforms, image, released, rating } = req.body;
     if ( !name || !description || !platforms || !image || !released || !rating) 
@@ -30,7 +31,7 @@ const { Op } = require('sequelize');
 // AL FINAL BORRAR ESTA LINEA:
 
 
-// ESTÓ ME GUARDÓ 2 PÁGINAS DE VIDEOGAMES EN LA DATABAS (por eso esta comentado):
+// ESTÓ ME GUARDÓ LAS PRIMERAS PÁGINAS DE VIDEOGAMES EN LA DATABAS (por eso esta comentado):
 
 // videogamesRouter.get('/test', async (req, res) => {
 //     try {
@@ -104,12 +105,16 @@ videogamesRouter.get('/test/:gameId' , async (req, res) => {
 
 videogamesRouter.post('/test', (req, res) => {
     const { name, description, platforms, image, released, rating, genres } = req.body;
+
     try {
         console.log('body----->', req.body)
-        const newGame = GameTest.create({ name, description, platforms, image, released, rating, genres } );
-        res.status(200).json(newGame);
+        // if (name && description && platforms && image && released && rating && genres) throw new Error('FAKE ERROR - ERROR FROM BACK')
+        const newGame = GameTest.create({ name, description, platforms, image, released, rating, genres });
+
+        res.status(200).send('GAME CREATED SUCCESS - FROM BACK');
+        // res.status(200).json(newGame);
     } catch (error) {
-        res.status(400).json({ error: error.message });  
+        res.status(400).json({ error: error.message });
     };
    
 
@@ -126,7 +131,7 @@ videogamesRouter.post('/test', (req, res) => {
 
 
 
-// DESCOMENTAR ESTAS DOS RUTAS, CUANDO BORRO LO DE DE ARRIBA:
+// DESCOMENTAR ESTAS RUTAS, CUANDO BORRO LO DE DE ARRIBA:
 
 // videogamesRouter.get('/', getAllVideogamesHandler);
 // videogamesRouter.get('/:idVideogame', getVideogameDetailsHandler);
