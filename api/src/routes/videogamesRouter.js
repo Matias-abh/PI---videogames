@@ -1,16 +1,13 @@
 const { Router } = require('express');
 const videogamesRouter = Router();
-const { getAllVideogamesHandler, getVideogameDetailsHandler, getVideogamesQueryHandler, postVideogameHandler } = require('../handlers/videogamesHandler.js');
+const { getAllVideogamesHandler, getVideogameDetailsHandler, postVideogameHandler } = require('../handlers/videogamesHandler.js');
 
 const validatePostVg = (req, res, next) => {
-    const { name, description, platforms, image, released, rating } = req.body;
-    if ( !name || !description || !platforms || !image || !released || !rating) 
-    return res.status(400).json({ error: error.message});
+    const { name, description, platforms, image, released, rating, genres } = req.body;
+    if ( !name || !description || !platforms || !image || !released || !rating || !genres) 
+    return res.status(400).json({ error: 'Missing data!'});
     next();
 };
-
-
-
 
 
 
@@ -133,9 +130,9 @@ videogamesRouter.post('/test', (req, res) => {
 
 // DESCOMENTAR ESTAS RUTAS, CUANDO BORRO LO DE DE ARRIBA:
 
-// videogamesRouter.get('/', getAllVideogamesHandler);
-// videogamesRouter.get('/:idVideogame', getVideogameDetailsHandler);
-// videogamesRouter.post('/', validatePostVg, postVideogameHandler);
+videogamesRouter.get('/', getAllVideogamesHandler);
+videogamesRouter.get('/:idVideogame', getVideogameDetailsHandler);
+videogamesRouter.post('/', validatePostVg, postVideogameHandler);
 
 
 

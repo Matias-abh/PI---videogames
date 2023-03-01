@@ -4,7 +4,7 @@ import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, NEXT_PAGE, PREV_PAGE, FILTER_BY_
 export const getAllVideogames = () => {
     return async (dispatch) => {
         try {
-            const { data } = (await axios.get(`http://localhost:3001/videogames/test`))
+            const { data } = (await axios.get(`http://localhost:3001/videogames/`))
             return dispatch({
                 type: GET_ALL_VIDEOGAMES,
                 payload: data,
@@ -19,7 +19,7 @@ export const getAllVideogames = () => {
 export const videogamesSearch = (gameName) => {
     return async (dispatch) => {
         try {
-            const { data } = (await axios.get(`http://localhost:3001/videogames/test?name=${gameName}`));
+            const { data } = (await axios.get(`http://localhost:3001/videogames/?name=${gameName}`));
             return dispatch({ type: VIDEOGAMES_SEARCH, payload: data });            
         } catch (error) {
             console.error(error);

@@ -1,4 +1,4 @@
-import axios, { all } from 'axios';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import validation from './validation.js';
@@ -10,11 +10,16 @@ import joystickIco from '../../assets/icons/joystickViolet.png';
 import xError from '../../assets/icons/xError.png';
 
 const Form = () => {
-    const [ form, setForm ] = useState({ name: '', image: '', description: '', platforms: [], released: '', rating: 0, genres: [] });
+    const [ form, setForm ] = useState({ name: '', image: '', description: '', platforms: [], released: '', rating: 0, genres: [1, 3, 4] });
     const [ errors, setErrors ] = useState({});
     const [ backSuccessResponse, setSuccessBackResponse ] = useState('');
     const [ backErrorResponse, setBackErrorResponse ] = useState('');
-    const { allVGOriginal } = useSelector((state) => state);    
+    const { allVGOriginal } = useSelector((state) => state);
+
+    // state test id
+    const [ idCreatedGame, setIdCreatedGame ] = useState('');
+
+
 
     useEffect(() => {
         const submitButton = document.querySelector('#submitButton');
@@ -39,17 +44,21 @@ const Form = () => {
         const response = allVGOriginal?.find((videogame) => videogame.name.toLowerCase().includes(form.name.toLowerCase()));
 
         if (!response) {
+            console.log('entroal if form----->', form)
             try {
-                const response = await axios.post(`http://localhost:3001/videogames/test`, form);
-                if (response.status !== 200) throw new Error(response);
-                else setSuccessBackResponse(response.data);
+                const response = await axios.post(`http://localhost:3001/videogames`, form);
+                if (response.status !== 200) throw new Error(response);               
+                else {
+                    console.log('se creo todo nice---id----->', response.data.id);
+                    setIdCreatedGame(response.data.id)
+                    setSuccessBackResponse(`The videogame ${response.data.name}, has been created successfully!`);
+                }
             } catch (error) {
                 setBackErrorResponse(error.response.data.error);
             };       
         } else {
             setBackErrorResponse('Error: the game you are trying to create already exists');
         };
-
 
 
         const modalSubmit = document.querySelector('#modalSubmit');
@@ -203,6 +212,7 @@ const Form = () => {
             {backSuccessResponse && <img src={joystickIco} /> || backErrorResponse && <img src={xError} /> }
             {backSuccessResponse && <h1>Great!</h1> || backErrorResponse && <h1>Something went wrong!</h1> }
             {backSuccessResponse && <h2>{backSuccessResponse}</h2> || backErrorResponse && <h2>{backErrorResponse}</h2> }
+            {idCreatedGame && <Link to={`/detail/${idCreatedGame}`} ><h2>Go to see it!</h2></Link>}
             <Link to='/home' className={css.linkToHomeModal} ><div className={css.btnHomeModal} >Back to Home</div></Link>
         </dialog>
         </>

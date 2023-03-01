@@ -18,7 +18,7 @@ const clearData = (dataArray) => {
         released: videogame.released,
         rating: videogame.rating,
         genres: genreNames,
-        api: true,
+        created: false,
        };
     });
 };

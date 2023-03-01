@@ -37,9 +37,10 @@ const getVideogameDetailsHandler = async (req, res) => {
 
 
 const postVideogameHandler = async (req, res) => {
-    const { name, description, platforms, image, released, rating, GenreId } = req.body;
+    const { name, description, platforms, image, released, rating, genres } = req.body;
     try {
-        const newVideogame = await postVideogame(name, description, platforms, image, released, rating, GenreId);
+        const newVideogame = await postVideogame(name, description, platforms, image, released, rating, genres);
+        console.log('nuwvideogame----->', newVideogame)
         res.status(200).json(newVideogame)
     } catch (error) {
         res.status(400).json({ error: error.message });

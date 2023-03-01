@@ -8,13 +8,10 @@ const { Op } = require('sequelize');
 const getAllVideogames = async () => {
     const allVideogames = await Videogame.findAll();
 
-    try {
-        const allVgDataAPI = await getAllVideogamesAPI();
-        const allVideogamesAPI = clearData(allVgDataAPI);
-        return [  ...allVideogames, ...allVideogamesAPI ];
-    } catch (error) {
-        throw Error(error);
-    };    
+    const allVgDataAPI = await getAllVideogamesAPI();
+    const allVideogamesAPI = clearData(allVgDataAPI);
+    return [  ...allVideogames, ...allVideogamesAPI ];
+   
 };
 
 
@@ -25,7 +22,6 @@ const getVideogamesQuery = async (name) => {
             name: { [Op.iLike]: `%${name}%`}
         }});
 
-    // try catch ??? !!!!!!!!!!!
 
     const allVideogames = await getAllVideogamesAPI();
     const filteredVideogames = allVideogames.filter((videogame) => 
@@ -42,20 +38,24 @@ const getVideogameDetails = async (idVideogame, from) => {
         const videogame = await clearGameData(idVideogame);      
         return videogame;
     }   
-    else return await Videogame.findByPk(idVideogame, { 
-        include: {
-            model: Genre,
-            through: {
-                // attributes: [],
-            },
-        }});
+    else {
+        return await Videogame.findByPk(idVideogame, { 
+            include: {
+                model: Genre,
+                attributes: ["name"],
+                through: {
+                    attributes: [],
+                },
+            }
+        });
+    }
 };
 
 
 
-const postVideogame = async (name, description, platforms, image, released, rating, GenreId) => {
+const postVideogame = async (name, description, platforms, image, released, rating, genres) => {
     const newVideogame = await Videogame.create({ name, description, platforms, image, released, rating });
-    await newVideogame.addGenres(GenreId);
+    await newVideogame.addGenres(genres);
     return newVideogame;
 };
 

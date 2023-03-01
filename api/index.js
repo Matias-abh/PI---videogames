@@ -21,9 +21,9 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const getAllGenresAPI = require('./src/controllers/getAllGenresAPI.js');
 // Syncing all the models at once.
-conn.sync({ force: false }).then( async () => {
+conn.sync({ force: true }).then( async () => {
 // guardo todos los genres en la database 'videogames':
-  // await getAllGenresAPI();
+  await getAllGenresAPI();
 
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console

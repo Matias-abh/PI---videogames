@@ -47,6 +47,7 @@ const Filtered = ({ resetCurrentPage }) => {
                     <div className={css.contFilterBtn} id='filterBtn' >                        
                         <h2>Filter by : <span>{filterOption || <span className={css.selectGenreDefault} >   select genre...</span> }</span></h2>
                     </div>
+
                     <ul className={css.ulFilter} id='ulFilter' >
                         <li onClick={filterHandler} >None</li>
                         <li onClick={filterHandler} >Action</li>

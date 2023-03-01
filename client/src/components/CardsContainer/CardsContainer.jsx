@@ -31,7 +31,7 @@ const CardsContainer = () => {
                                 name={game.name}
                                 image={game.image}
                                 genres={game.genres}                              
-                                rating={game.rating}                              
+                                rating={game.rating}
                             />
                         )
                     })

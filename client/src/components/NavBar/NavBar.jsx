@@ -12,17 +12,13 @@ const NavBar = () => {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
   
-    const [ currentPage, setCurrentPage ] = useState(window.sessionStorage.getItem('currentPage'));
-
-
 
     const gamesSourceHandler = (event) => {
         const source = event.target.textContent;
-        window.sessionStorage.setItem('currentPage', 1);
         dispatch(filterBySource(source));
-        // window.location.reload();
-        window.location.pathname = '/';
-        window.location.pathname = '/home';
+        // window.sessionStorage.setItem('currentPage', 1);
+        // window.location.pathname = '/';
+        // window.location.pathname = '/home';
     };
 
 
