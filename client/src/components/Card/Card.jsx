@@ -2,7 +2,10 @@ import { Link } from 'react-router-dom';
 import css from './card.module.css';
 
 
-const Card = ({ id, name, image, genres, rating }) => {
+const Card = ({ id, name, image, genres, Genres, rating, created }) => {
+
+    const genresCreated = Genres?.map((genre) => genre.name);
+    
 
     return (
         <>
@@ -18,8 +21,8 @@ const Card = ({ id, name, image, genres, rating }) => {
                         <h3>Rating: {rating}</h3>
                     </div>
 
-                    <div className={css.contGenres} >                
-                        <h3>Genres: {genres?.join(', ')}</h3>
+                    <div className={css.contGenres} >
+                        {   created ? <h3>{genresCreated?.join(', ')}</h3> : <h3>{genres?.join(', ')}</h3>  }
                     </div>
 
                 </div>
@@ -29,4 +32,3 @@ const Card = ({ id, name, image, genres, rating }) => {
 };
 
 export default Card;
-

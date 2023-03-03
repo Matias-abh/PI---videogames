@@ -6,7 +6,6 @@ module.exports = (sequelize) => {
   sequelize.define('GameTest', {
     id: {
       type: DataTypes.INTEGER,
-      // defaultValue: DataTypes.UUIDV1, 
       autoIncrement: true,
       primaryKey: true,
     },
@@ -14,10 +13,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // description: {
-    //   type: DataTypes.TEXT,
-      // allowNull: false,
-    // },
     platforms: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
@@ -36,12 +31,10 @@ module.exports = (sequelize) => {
     },
     created: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
+      defaultValue: false,
     },
-    // BORRAR ATRIBUTO GENRES:
-
     genres: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.STRING || DataTypes.INTEGER),
       allowNull: false,
     }
   }, { timestamps: false });

@@ -1,0 +1,40 @@
+
+.pageNotFound {
+    /* background-color: red; */
+    width: 100%;
+    min-height: 86.4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.contErrorImg {
+    /* background-color: rgb(38, 255, 0); */
+    padding-right: 2.6rem;
+    width: auto;
+    height: auto;
+    
+}
+
+.contErrorImg img {
+    width: 100%;
+    height: 14rem;
+    object-fit: contain;
+
+}
+
+
+.contError404 {
+    background-color: #aaa;
+    font-size: 1.6rem;
+    width: 24rem;
+    height: 14rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .4rem;
+
+}

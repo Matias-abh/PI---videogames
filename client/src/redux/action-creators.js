@@ -1,20 +1,18 @@
 import axios from 'axios';
-import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, NEXT_PAGE, PREV_PAGE, FILTER_BY_GENRE, FILTER_BY_SOURCE, ORDER_ALPHA, ORDER_BY_RATING } from './action-types.js';
+import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, NEXT_PAGE, PREV_PAGE, SET_CURRENT_PAGE, FILTER_BY_GENRE, FILTER_BY_SOURCE, ORDER_ALPHA, ORDER_BY_RATING, ERROR_REQUEST } from './action-types.js';
+
+
 
 export const getAllVideogames = () => {
     return async (dispatch) => {
         try {
-            const { data } = (await axios.get(`http://localhost:3001/videogames/`))
-            return dispatch({
-                type: GET_ALL_VIDEOGAMES,
-                payload: data,
-            });            
+            const { data } = (await axios.get(`http://localhost:3001/videogames/`));
+            return dispatch({ type: GET_ALL_VIDEOGAMES, payload: data });            
         } catch (error) {
-            console.error(error);
-        }
+            return dispatch({ type: ERROR_REQUEST, payload: error.response.data.error });
+        };
     };
 };
-
 
 export const videogamesSearch = (gameName) => {
     return async (dispatch) => {
@@ -22,7 +20,7 @@ export const videogamesSearch = (gameName) => {
             const { data } = (await axios.get(`http://localhost:3001/videogames/?name=${gameName}`));
             return dispatch({ type: VIDEOGAMES_SEARCH, payload: data });            
         } catch (error) {
-            console.error(error);
+            return dispatch({ type: ERROR_REQUEST, payload: error.response.data.error });
         };
     };
 };
@@ -49,4 +47,12 @@ export const orderAlpha = (order) => {
 
 export const orderByRating = (order) => {
     return { type: ORDER_BY_RATING, payload: order };
+};
+
+export const setCurrentPage = (currentPage) => {
+    return { type: SET_CURRENT_PAGE, payload: currentPage };
+};
+
+export const setError = (error) => {
+    return { type: ERROR_REQUEST, payload: error };
 };

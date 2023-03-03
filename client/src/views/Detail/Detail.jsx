@@ -9,28 +9,27 @@ const Detail = ({ match }) => {
     const gameId = match.params.gameId;
     
     useEffect(()=> {
+        const loader = document.querySelector('#loader');
+        loader.classList.remove('visibilityLoader');
         axios.get(`http://localhost:3001/videogames/${gameId}`)
             .then(res => res.data)
             .then(data => setGameDetail(data));
-            window.scrollTo(null, 0)
+            window.scrollTo(null, 0);
     }, []);
-
-    const genres = gameDetail?.Genres?.map((genre) => genre.name);
-
-
-    // PREGUNTAR POR LO DEL DESTRUCTURING DE UN SPLIT----
-    // const fn = () => {
-    //     const releasedArray = gameDetail?.released?.split('T');
-    //     const [ first, sec ] = releasedArray;
-    //         // console.log('released--->', releasedArray);
-    //     // console.log('resuuult---->', first);
-    // }
     
+    useEffect(() => {
+        const loader = document.querySelector('#loader');        
+        if (Object.keys(gameDetail).length) loader.classList.add('visibilityLoader');
+    }, [gameDetail]);
+    
+    const genres = gameDetail?.Genres?.map((genre) => genre.name);
+    
+
     return(
         <>
             <div className={css.detail} >
                 <div className={css.contImg} >          
-                    <img src={gameDetail.image} className={css.gameImg} />
+                    <img src={gameDetail?.image} className={css.gameImg} />
                     <div className={css.contBackBtn} >
                         <Link to='/home'><button><img src={goBackIco} />Back</button></Link>
                     </div>

@@ -1,9 +1,10 @@
 const { Genre } = require('../db.js');
 
 const getAllGenres = async () => {
-    const allGenres = await Genre.findAll({ attributes: ['name']});
-    return allGenres;
+    return await Genre.findAll();
 };
+
+
 
 module.exports = {
     getAllGenres,

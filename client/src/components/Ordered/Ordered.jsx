@@ -1,54 +1,45 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import { orderAlpha, orderByRating } from "../../redux/action-creators";
+import { orderAlpha, orderByRating, setCurrentPage } from "../../redux/action-creators";
 import { useDispatch } from 'react-redux';
-
 import css from './ordered.module.css';
 import joystickIco from '../../assets/icons/joystickViolet.png';
 import arrowDown from '../../assets/icons/arrowDown.png';
 import arrowMenu from '../../assets/icons/arrowViolet.png';
 
-const Ordered = ({ resetCurrentPage }) => {
+const Ordered = () => {
     const dispatch = useDispatch();
+    
+    
+    const orderedArrowHandler = () => {
+        const arrowMenuBtn = document.querySelector('#arrowMenuBtn');
+        const orderedMenu =  document.querySelector('#orderedMenu');
+        orderedMenu?.classList.toggle(css.activeOrderedMenu);
+        arrowMenuBtn?.classList.toggle(css.activeArrowMenu);
+    };   
+    const ulListHandler = () => {
+        const arrowMenuBtn = document.querySelector('#arrowMenuBtn');
+        const orderedMenu =  document.querySelector('#orderedMenu');
+        orderedMenu?.classList.toggle(css.activeOrderedMenu);
+        arrowMenuBtn?.classList.toggle(css.activeArrowMenu);
+    };    
 
-    useEffect(() => {
-        const arrowMenu = document.querySelector('#arrowMenu');
-        const orderedMenu = document.querySelector('#orderedMenu');
-        const ulOrderList = document.querySelectorAll('.ulOrder');
-        const alphaBtn = document.querySelector('#alphaBtn');
-        const ulAlpha = document.querySelector('#ulAlpha')
-        const ratingBtn = document.querySelector('#ratingBtn');
-        const ulRating = document.querySelector('#ulRating')
-        const arrowAlpha = document.querySelector('#arrowAlpha')
-        const arrowRating = document.querySelector('#arrowRating')
-        
-        arrowMenu.addEventListener('click', () => {
-            orderedMenu.classList.toggle(css.activeOrderedMenu);
-            arrowMenu.classList.toggle(css.activeArrowMenu);
-        });
-        
-        ulOrderList.forEach((ulOrder) => {
-            ulOrder.addEventListener('click', () => {                
-                orderedMenu.classList.toggle(css.activeOrderedMenu);
-                arrowMenu.classList.toggle(css.activeArrowMenu);
-            });
-        });
+    const alplhaBtnHandler = () => {
+        const ulAlpha = document.querySelector('#ulAlpha');
+        const arrowAlpha = document.querySelector('#arrowAlpha');
+        ulAlpha.classList.toggle(css.extendedUl);
+        arrowAlpha.classList.toggle(css.closeUl);        
+    };
 
-        alphaBtn.addEventListener('click', () => {
-            ulAlpha.classList.toggle(css.extendedUl);
-            arrowAlpha.classList.toggle(css.closeUl);
-        });
-        
-        ratingBtn.addEventListener('click', () => {
-            ulRating.classList.toggle(css.extendedUl);
-            arrowRating.classList.toggle(css.closeUl);
-        });
-    }, []);
-
+    const ratingBtnHandler = () => {
+        const ulRating = document.querySelector('#ulRating');
+        const arrowRating = document.querySelector('#arrowRating');
+        ulRating.classList.toggle(css.extendedUl);
+        arrowRating.classList.toggle(css.closeUl);
+    };
 
     const orderHandler = (event) => {
         const order = event.target.textContent;
-        resetCurrentPage();
+        dispatch(setCurrentPage(1));
         if (order === 'A to Z' || order === 'Z to A') return dispatch(orderAlpha(order));
         else return dispatch(orderByRating(order));
     };
@@ -57,36 +48,35 @@ const Ordered = ({ resetCurrentPage }) => {
     return (
         <>  
             <div className={css.contArrowMenu} >                            
-                <img src={arrowMenu} className={css.arrowMenu} id='arrowMenu' />
+                <img src={arrowMenu} className={css.arrowMenu} id='arrowMenuBtn' onClick={orderedArrowHandler} />
             </div>
 
             <div className={css.ordered} id='orderedMenu' >
 
-                    <div className={css.contTitle} >
-                        <img src={joystickIco} className={css.logoImg} />
-                        <Link to='/home' className={css.title} ><h1>Video-Games</h1></Link>
-                    </div>
+                <div className={css.contTitle} >
+                    <img src={joystickIco} className={css.logoImg} />
+                    <Link to='/home' className={css.title} ><h1>Video-Games</h1></Link>
+                </div>
 
                 <div className={css.contOrderAlpha} >
-                    <div className={`${css.contOrAlphaBtn}`} id='alphaBtn' >                        
+                    <div className={`${css.contOrAlphaBtn}`} id='alphaBtn' onClick={alplhaBtnHandler} >                        
                         <h3>Order alphabetically</h3><img src={arrowDown} className={css.arrowAlpha} id='arrowAlpha' /> 
                     </div>
-                    <ul className={`${css.ulOrderAlpha} ulOrder`} id='ulAlpha' >
+                    <ul className={`${css.ulOrderAlpha} ulOrder`} id='ulAlpha' onClick={ulListHandler} >
                         <li onClick={orderHandler} >A to Z</li>
                         <li onClick={orderHandler} >Z to A</li>
                     </ul>
                 </div>
 
                 <div className={css.contOrderRating} >
-                    <div className={`${css.contOrRatingBtn}`} id='ratingBtn' >           
+                    <div className={`${css.contOrRatingBtn}`} id='ratingBtn' onClick={ratingBtnHandler} >           
                         <h3>Order by rating</h3><img src={arrowDown} className={css.arrowRating} id='arrowRating' /> 
                     </div>
-                    <ul className={`${css.ulOrderRating} ulOrder`} id='ulRating' >
+                    <ul className={`${css.ulOrderRating} ulOrder`} id='ulRating' onClick={ulListHandler} >
                         <li onClick={orderHandler} >Highest rating</li>
                         <li onClick={orderHandler} >Lowest rating</li>
                     </ul>
                 </div>
-
             </div>
         </>
     )

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import validation from './validation.js';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import css from './form.module.css';
 import xIco from '../../assets/icons/xIco.png';
@@ -10,16 +10,24 @@ import joystickIco from '../../assets/icons/joystickViolet.png';
 import xError from '../../assets/icons/xError.png';
 
 const Form = () => {
-    const [ form, setForm ] = useState({ name: '', image: '', description: '', platforms: [], released: '', rating: 0, genres: [1, 3, 4] });
+    const [ form, setForm ] = useState({ name: '', image: '', description: '', platforms: [], released: '', rating: 0, genres: [] });
     const [ errors, setErrors ] = useState({});
+    const [ genres, setGenres ] = useState([]);
+    const [ genreNames, setGenreNames ] = useState([]);
     const [ backSuccessResponse, setSuccessBackResponse ] = useState('');
     const [ backErrorResponse, setBackErrorResponse ] = useState('');
+    const [ idCreatedGame, setIdCreatedGame ] = useState('');
     const { allVGOriginal } = useSelector((state) => state);
 
-    // state test id
-    const [ idCreatedGame, setIdCreatedGame ] = useState('');
 
+    const getAllGenres = async () => {
+        const { data } = (await axios.get(`http://localhost:3001/genres`));
+        setGenres(data);
+    };
 
+    useEffect(() => {
+        getAllGenres();
+    }, []);
 
     useEffect(() => {
         const submitButton = document.querySelector('#submitButton');
@@ -27,8 +35,8 @@ const Form = () => {
 
         for (let input of arrayForm) {
             if (input === '' || input == [].length || Object.keys(errors).length > 0) {
-                submitButton.classList.add(css.disabledSubmitButton);
                 submitButton.disabled = true;
+                submitButton.classList.add(css.disabledSubmitButton);
                 return;
             } else {
                 submitButton.disabled = false;
@@ -44,14 +52,12 @@ const Form = () => {
         const response = allVGOriginal?.find((videogame) => videogame.name.toLowerCase().includes(form.name.toLowerCase()));
 
         if (!response) {
-            console.log('entroal if form----->', form)
             try {
-                const response = await axios.post(`http://localhost:3001/videogames`, form);
+                const response = await axios.post(`http://localhost:3001/videogames/`, form);
                 if (response.status !== 200) throw new Error(response);               
                 else {
-                    console.log('se creo todo nice---id----->', response.data.id);
                     setIdCreatedGame(response.data.id)
-                    setSuccessBackResponse(`The videogame ${response.data.name}, has been created successfully!`);
+                    setSuccessBackResponse(`The videogame "${response.data.name}", has been created successfully!`);
                 }
             } catch (error) {
                 setBackErrorResponse(error.response.data.error);
@@ -74,11 +80,13 @@ const Form = () => {
         setErrors(validation({ ...form, [name]: value }));
     };
 
-    const inputGendersHandler = (event) => {
+    const inputGenresHandler = (event) => {
         const { value } = event.target;
         if (form.genres.includes(value)) return;
         setForm({ ...form, genres: [ ...form.genres, value ] });
         setErrors(validation({ ...form, genres: [ ...form.genres, value ] }));
+        const genreName = event.target.options[event.target.selectedIndex].text;
+        setGenreNames([ ...genreNames, genreName ])
     };
     
     const inputPlatformsHandler = (event) => {
@@ -90,18 +98,27 @@ const Form = () => {
 
     const removeGenre = (event) => {
         const { name } = event.target;
-        const index = form.genres.indexOf(name);
-        form.genres.splice(index, 1)
+        const indexGenreNames = genreNames.indexOf(name);        
+        genreNames.splice(indexGenreNames, 1);
+        
+        const selectedGenre = genres.find((genre) => genre.name === name);        
+        const indexGenreForm = form.genres.indexOf((selectedGenre.id).toString());        
+        form.genres.splice(indexGenreForm, 1);       
         setForm({ ...form, });
         setErrors(validation({ ...form }));
-    };
-    
+    };    
+
+
     const removePlatform = (event) => {
         const { name } = event.target;
         const index = form.platforms.indexOf(name);
         form.platforms.splice(index, 1)
         setForm({ ...form });
         setErrors(validation({ ...form }));
+    };
+
+    const reload = () => {
+        window.location.pathname = '/home';
     };
 
 
@@ -144,31 +161,15 @@ const Form = () => {
                     </section>
                     
                     <section className={css.contGenres} >
-                        <label htmlFor='genres' >Genres: </label>
-                        <select name='genres' value={form.genres} onChange={inputGendersHandler} multiple >
-                            <option value='Action' >Action</option>
-                            <option value='Indie' >Indie</option>
-                            <option value='Adventure' >Adventure</option>
-                            <option value='RPG' >RPG</option>
-                            <option value='Strategy' >Strategy</option>
-                            <option value='Shooter' >Shooter</option>
-                            <option value='Casual' >Casual</option>
-                            <option value='Simulation' >Simulation</option>
-                            <option value='Puzzle' >Puzzle</option>
-                            <option value='Arcade' >Arcade</option>
-                            <option value='Platformer' >Platformer</option>
-                            <option value='Racing' >Racing</option>
-                            <option value='Massively Multiplayer' >Massively Multiplayer</option>
-                            <option value='Sports' >Sports</option>
-                            <option value='Fighting' >Fighting</option>
-                            <option value='Family' >Family</option>
-                            <option value='Board Games' >Board Games</option>
-                            <option value='Educational' >Educational</option>
-                            <option value='Card' >Card</option>
-                        </select>
+                    <label htmlFor='genres' >Genres: </label>
+                    <select name='genres' value={form.genres} onChange={inputGenresHandler} multiple >
+                        {
+                            genres?.map((genre, idx) => <option value={genre.id}  key={idx}>{genre.name}</option>)
+                        }
+                    </select>
                         {errors.genres && <div className={css.errors} >⚠ {errors.genres}</div>}
                         <div className={css.contArrayGenres} >
-                            {form.genres.map((genre, idx) => <span key={idx} >{genre}<img name={genre} onClick={removeGenre} src={xIco}/></span> )}
+                            {genreNames.map((genre, idx) => <span key={idx} >{genre}<img name={genre} onClick={removeGenre} src={xIco}/></span> )}
                         </div>
                     </section>
 
@@ -212,34 +213,11 @@ const Form = () => {
             {backSuccessResponse && <img src={joystickIco} /> || backErrorResponse && <img src={xError} /> }
             {backSuccessResponse && <h1>Great!</h1> || backErrorResponse && <h1>Something went wrong!</h1> }
             {backSuccessResponse && <h2>{backSuccessResponse}</h2> || backErrorResponse && <h2>{backErrorResponse}</h2> }
-            {idCreatedGame && <Link to={`/detail/${idCreatedGame}`} ><h2>Go to see it!</h2></Link>}
-            <Link to='/home' className={css.linkToHomeModal} ><div className={css.btnHomeModal} >Back to Home</div></Link>
+            {idCreatedGame && <div><Link to={`/detail/${idCreatedGame}`} className={css.goToSeeItLink} ><h2 className={css.goToSeeIt} >Go to see it!</h2></Link> <span className={css.or} >or</span></div>}
+            <span onClick={reload} className={css.linkToHomeModal} ><div className={css.btnHomeModal} >Back to Home</div></span>
         </dialog>
         </>
     )
 };
 
 export default Form;
-
-
-
-
-// "PlayStation 5" 
-// "Xbox Series S/X"
-// "PlayStation 4" 
-// "PC" 
-// "PlayStation 3"
-// "Xbox 360"
-// "Xbox One"
-// "Nintendo Switch"
-// "Linux"
-// "macOS"
-// "Android"
-// "PS Vita"
-// "iOS" 
-// "Xbox" 
-// "Web" 
-// "Wii U"
-// "Nintendo 3DS"
-// "PlayStation 2"
-// "Dreamcast"

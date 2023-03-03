@@ -280,7 +280,7 @@ form {
     /* position: absolute; */
     /* top: 15rem; */
     /* left: 16.8rem; */
-    margin: .4rem 0;
+    margin-bottom: .4rem ;
     width: fit-content;
     height: 6rem;
     object-fit: cover; 
@@ -294,7 +294,7 @@ form {
     box-shadow: 22px 22px 4px 0px rgba(0,0,0,0.54);
 
     text-align: center;
-    
+    overflow: hidden;
     border-radius: 12px;
 }
 
@@ -308,8 +308,9 @@ form {
 
 
 .linkToHomeModal {
-    color: black;
+    color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 .linkToHomeModal:visited {
     color: #fff;
@@ -317,7 +318,7 @@ form {
 
 .btnHomeModal {
     background-color: #121212;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     
     margin-top: 2rem;
     display: flex;
@@ -341,13 +342,47 @@ form {
 .modalDisplay {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 
 
+.goToSeeItLink {
+    text-decoration: none;
+}
 
 
+.modalDisplay .goToSeeIt {
+    background-color: #8332AC;
+    color: #fff;
+    font-size: 1.2rem;
+    
+    /* margin-top: 2rem; */
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 3rem;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 1px 20px 15px -8px rgba(0,0,0,0.58);
+
+    transition: font-size .2s, opacity .1s;
+}
+    .goToSeeIt:hover {
+            /* transform: scale(1.016); */
+            font-size: 1.42rem;
+            opacity: .82;
+        }
+        
+        
+        
+.or {
+    display: inline-block;
+    padding: auto 0;
+    margin-top: 1.4rem;
+}
 
 
 
@@ -366,7 +401,11 @@ form {
 
     @media (max-width: 1360px) {
 
-        .contTitle h1 {
+
+        .modalDisplay .goToSeeIt {
+            margin: 0;
+        }
+        /* .contTitle h1 {
             font-size: 5rem;
         }
 
@@ -396,10 +435,10 @@ form {
         }
         .contSubmitBtn button {
             font-size: 1.6rem;
-        }
+        } */
     }
 
-
+/* 
     @media (max-width: 990px) {
         .container {
             flex-direction: column;
@@ -453,7 +492,7 @@ form {
             margin: 2rem auto 1rem;
             width: 100%;
         }
-    }
+    } */
 
 
 /* seguir con la media querie 600px */

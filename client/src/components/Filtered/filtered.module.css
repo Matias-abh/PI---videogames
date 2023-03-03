@@ -60,17 +60,27 @@
     padding: 0;
     
     width: 26rem;
+    height: 74vh;
     border-radius: 4px;
     box-shadow: 8px 8px 18px black;
-    
+    top: -50rem;
     opacity: 0;
-    display: none;
+    /* display: none; */
+    overflow-y: scroll;
 
-    transition: top 1s;
-    animation: activeFilterOptions .36s forwards ease-out;
+    transition: top .6s;
+    /* animation: activeFilterOptions .36s forwards ease-out; */
 
-}   
-    @keyframes activeFilterOptions {
+}
+
+    .activeUlFilter {
+        opacity: 1;
+        top: 4.6rem;
+    }
+
+
+
+    /* @keyframes activeFilterOptions {
             from {
                 top: -40rem;
                 opacity: 0;
@@ -79,7 +89,7 @@
                 top: 4.4rem;
                 opacity: 1;
             }
-        }
+        } */
 
 
    

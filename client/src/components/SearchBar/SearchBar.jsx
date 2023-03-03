@@ -1,23 +1,30 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { videogamesSearch } from '../../redux/action-creators.js';
-
 import css from './searchBar.module.css';
 import searchIco from '../../assets/icons/searchIco.png';
 
+
 const SearchBar = () => {
+
+    const { allVideogames } = useSelector((state) => state);
     const [ search, setSearch ] = useState('');
     const dispatch = useDispatch();
-    // const [ searchResults, setSearchResults ] = useState([]);
 
+
+    useEffect(() => {
+        const loader = document.querySelector('#loader');
+        if (allVideogames.length) loader.classList.add('visibilityLoader');
+    }, [allVideogames]);
+    
     const searched = (event) => {
         const { value } = event.target;
         setSearch(value);
-        // dispatch(videogamesSearch(value));       // con este dispatch haría una búsqueda en tiempo real (se actualizaría por cada letra que ingrese por input)
     };
 
     const searchHandler = () => {
+        const loader = document.querySelector('#loader');
+        loader.classList.remove('visibilityLoader');
         dispatch(videogamesSearch(search));
     };
 
@@ -38,4 +45,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-

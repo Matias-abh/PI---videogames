@@ -1,5 +1,15 @@
 
-
+/* .loaderTest {
+    position: fixed;
+    z-index: 900;
+    background-color: rgb(205, 44, 44);
+    color: #fff;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
 
 
 /* .disableScroll {
@@ -27,12 +37,13 @@
     width: 100vw;
     height: 100vh;
     opacity: .6;
+
     
     animation: videogameImages 30s infinite alternate ease-in-out;
 }
     @keyframes videogameImages {
         to {
-            margin-left: -142rem;
+            margin-left: -130rem;
         }
     }
 
@@ -188,7 +199,9 @@
     position: relative;
     z-index: 50;
     background-color: #10002B;
+    color: #Fff;
     font-size: 2.2rem;
+    cursor: pointer;
     text-decoration: none;
     border: 1px solid #aaa;
     border-radius: 12px;
@@ -302,6 +315,39 @@
 
 
 
+.unmountLanding {
+    opacity: 0;
+    top: -60rem;
+    /* transform: scale(3.5); */
+    transition: top 1.2s, opacity 1s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -328,7 +374,7 @@
         } */
         
         .contLogoJoystick {
-            margin-left: 58rem;
+            margin-left: 62rem;
         }
     }
 

@@ -36,3 +36,72 @@
     width: 100%;
     height: 20rem;
     }
+
+
+
+
+
+.modalError {
+    color: black;
+    width: 50%;
+    height: 34%;
+    margin: auto;
+    box-shadow: 22px 22px 4px 0px rgba(0,0,0,0.54);
+
+    text-align: center;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+
+.btnCloseModal {
+    background-color: #121212;
+    font-size: 1.2rem;
+    
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 3rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 1px 20px 15px -8px rgba(0,0,0,0.58);
+
+    transition: font-size .2s, opacity .1s;
+
+}
+
+
+.imgCloseIco {
+    position: absolute;
+
+    cursor: pointer;
+    top: .7rem;
+    right: .7rem;
+    width: fit-content;
+    height: 2.7rem;
+    object-fit: cover;
+    padding: .6rem;
+    border-radius: 50%;
+    background-color: #aaaaaa57;
+
+    transition: transform .2s background .2s;
+}
+    .imgCloseIco:hover {
+        transform: scale(1.046);
+        background-color: #aaa;
+    }
+
+.imgError{
+    margin: 1rem 0;
+    width: fit-content;
+    height: 6rem;
+    object-fit: cover; 
+}
+
+.modalDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
