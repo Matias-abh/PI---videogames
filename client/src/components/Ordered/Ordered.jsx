@@ -10,14 +10,7 @@ import resetImg from '../../assets/icons/reset.png';
 const Ordered = () => {
     const dispatch = useDispatch();
     
-    
-    const orderedArrowHandler = () => {
-        const arrowMenuBtn = document.querySelector('#arrowMenuBtn');
-        const orderedMenu =  document.querySelector('#orderedMenu');
-        orderedMenu?.classList.toggle(css.activeOrderedMenu);
-        arrowMenuBtn?.classList.toggle(css.activeArrowMenu);
-    };   
-    const ulListHandler = () => {
+    const dropDownHandler = () => {
         const arrowMenuBtn = document.querySelector('#arrowMenuBtn');
         const orderedMenu =  document.querySelector('#orderedMenu');
         orderedMenu?.classList.toggle(css.activeOrderedMenu);
@@ -50,13 +43,14 @@ const Ordered = () => {
         dispatch(setCurrentPage(1));
         const resetImg = document.querySelector('#resetImg');
         resetImg.classList.toggle(css.spinImg);
+        dropDownHandler();        
     };
 
 
     return (
         <>  
             <div className={css.contArrowMenu} >                            
-                <img src={arrowMenu} className={css.arrowMenu} id='arrowMenuBtn' onClick={orderedArrowHandler} />
+                <img src={arrowMenu} className={css.arrowMenu} id='arrowMenuBtn' onClick={dropDownHandler} />
             </div>
 
             <div className={css.ordered} id='orderedMenu' >
@@ -70,7 +64,7 @@ const Ordered = () => {
                     <div className={`${css.contOrAlphaBtn}`} id='alphaBtn' onClick={alplhaBtnHandler} >                        
                         <h3>Order alphabetically</h3><img src={arrowDown} className={css.arrowAlpha} id='arrowAlpha' /> 
                     </div>
-                    <ul className={`${css.ulOrderAlpha} ulOrder`} id='ulAlpha' onClick={ulListHandler} >
+                    <ul className={`${css.ulOrderAlpha} ulOrder`} id='ulAlpha' onClick={dropDownHandler} >
                         <li onClick={orderHandler} >A to Z</li>
                         <li onClick={orderHandler} >Z to A</li>
                     </ul>
@@ -80,7 +74,7 @@ const Ordered = () => {
                     <div className={`${css.contOrRatingBtn}`} id='ratingBtn' onClick={ratingBtnHandler} >           
                         <h3>Order by rating</h3><img src={arrowDown} className={css.arrowRating} id='arrowRating' /> 
                     </div>
-                    <ul className={`${css.ulOrderRating} ulOrder`} id='ulRating' onClick={ulListHandler} >
+                    <ul className={`${css.ulOrderRating} ulOrder`} id='ulRating' onClick={dropDownHandler} >
                         <li onClick={orderHandler} >Highest rating</li>
                         <li onClick={orderHandler} >Lowest rating</li>
                     </ul>

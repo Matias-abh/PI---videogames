@@ -59,7 +59,8 @@
     height: fit-content;
     object-fit: cover;
     /* margin-right: 0px; */
-    transform: rotate(-20deg)
+    cursor: pointer;
+    transform: rotate(-20deg);
 }
 
     /* .title:hover + .logoImg {

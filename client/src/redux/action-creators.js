@@ -14,19 +14,15 @@ export const getAllVideogames = () => {
     };
 };
 
-// export const videogamesSearch = (gameName) => {
-//     return async (dispatch) => {
-//         try {
-//             const { data } = (await axios.get(`http://localhost:3001/videogames/?name=${gameName}`));
-//             return dispatch({ type: VIDEOGAMES_SEARCH, payload: data });            
-//         } catch (error) {
-//             return dispatch({ type: ERROR_REQUEST, payload: error.response.data.error });
-//         };
-//     };
-// };
-
 export const videogamesSearch = (gameName) => {
-    return { type: VIDEOGAMES_SEARCH, payload: gameName };
+    return async (dispatch) => {
+        try {
+            const { data } = (await axios.get(`http://localhost:3001/videogames/?name=${gameName}`));
+            return dispatch({ type: VIDEOGAMES_SEARCH, payload: data });            
+        } catch (error) {
+            return dispatch({ type: ERROR_REQUEST, payload: error.response.data.error });
+        };
+    };
 };
 
 export const nextPage = (firstIndexOfPage) => {

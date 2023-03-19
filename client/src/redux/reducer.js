@@ -25,21 +25,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };
 
     
-        // case VIDEOGAMES_SEARCH:
-        //     return {
-        //         ...state,
-        //         allVideogames: payload,
-        //         allVideogamesCopy: payload,
-        //     };
-
         case VIDEOGAMES_SEARCH:
-            const resultSearch = state.allVGOriginal.filter((game) => game.name.toLowerCase().includes(payload.toLowerCase()));
-        return { ...state, allVideogames: resultSearch };
+            return {
+                ...state,
+                allVideogames: payload,
+                allVideogamesCopy: payload,
+            };
 
         
         case PREV_PAGE:
             return { ...state, allVideogames: state.allVideogamesCopy.slice(payload - 15)};
-
+            
 
         case NEXT_PAGE:
             return { ...state, allVideogames: state.allVideogamesCopy.slice(payload)};
@@ -47,6 +43,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             
         case SET_CURRENT_PAGE:
             return { ...state, currentPage: payload };
+
         
         case RESET_HOME:
             return { ...state, allVideogames: state.allVGOriginal, allVideogamesCopy: state.allVGOriginal, leakedGamesBySource: state.allVGOriginal };
@@ -89,9 +86,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
             if (!state.auxAllVgOriginal.length) {
                 state.auxAllVgOriginal = [ ...state.allVGOriginal ];
-            }
-            
-            
+            };          
             if (payload === 'A to Z') {
                 const orderedVideogames = state.allVideogamesCopy.sort((a, b) => a.name < b.name ? -1 : 1);
                 const allVGOrdered = state.allVGOriginal.sort((a, b) => a.name < b.name ? -1 : 1);
@@ -104,7 +99,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };                        
                 
             
-            case ORDER_BY_RATING:
+        case ORDER_BY_RATING:
             
             if (!state.auxAllVgOriginal.length) state.auxAllVgOriginal = [ ...state.allVGOriginal ];
             
@@ -120,7 +115,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };
                
             
-            case ERROR_REQUEST: 
+        case ERROR_REQUEST: 
             return { ...state, errorRequest: payload };
             
             case RESET_ORDER:
