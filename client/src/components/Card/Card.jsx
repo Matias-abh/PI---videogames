@@ -11,7 +11,7 @@ const Card = ({ id, name, image, genres, Genres, rating, created }) => {
         <>
             <Link className={css.linkCard} to={`/detail/${id}`} >
                 <div className={css.card} >
-                    <Link className={css.name} to={`/detail/${id}`} ><h2>{name}</h2></Link>
+                    <div className={css.name} ><h2>{name}</h2></div>
 
                     <div className={css.contImg} >                    
                         <img src={image} />
