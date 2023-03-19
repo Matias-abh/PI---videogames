@@ -26,6 +26,7 @@ const SearchBar = () => {
         const loader = document.querySelector('#loader');
         loader.classList.remove('visibilityLoader');
         dispatch(videogamesSearch(search));
+        setSearch('');
     };
 
     return (

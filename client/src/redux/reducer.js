@@ -1,4 +1,4 @@
-import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, PREV_PAGE, NEXT_PAGE, SET_CURRENT_PAGE, FILTER_BY_GENRE, FILTER_BY_SOURCE, ORDER_ALPHA, ORDER_BY_RATING, ERROR_REQUEST } from './action-types.js';
+import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, PREV_PAGE, NEXT_PAGE, SET_CURRENT_PAGE, RESET_HOME, FILTER_BY_GENRE, FILTER_BY_SOURCE, ORDER_ALPHA, ORDER_BY_RATING, ERROR_REQUEST, RESET_ORDER } from './action-types.js';
 
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
     allVideogamesCopy: [],
     currentPage: 1,
     errorRequest: '',
+    auxAllVgOriginal: [],
 };
 
 
@@ -24,12 +25,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };
 
     
+        // case VIDEOGAMES_SEARCH:
+        //     return {
+        //         ...state,
+        //         allVideogames: payload,
+        //         allVideogamesCopy: payload,
+        //     };
+
         case VIDEOGAMES_SEARCH:
-            return {
-                ...state,
-                allVideogames: payload,
-                allVideogamesCopy: payload,
-            };        
+            const resultSearch = state.allVGOriginal.filter((game) => game.name.toLowerCase().includes(payload.toLowerCase()));
+        return { ...state, allVideogames: resultSearch };
 
         
         case PREV_PAGE:
@@ -42,6 +47,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
             
         case SET_CURRENT_PAGE:
             return { ...state, currentPage: payload };
+        
+        case RESET_HOME:
+            return { ...state, allVideogames: state.allVGOriginal, allVideogamesCopy: state.allVGOriginal, leakedGamesBySource: state.allVGOriginal };
 
 
         case FILTER_BY_GENRE:
@@ -74,12 +82,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 const filteredVGCreated = state.allVGOriginal.filter((game) => game.created === true)
                 return {...state, allVideogames: filteredVGCreated, allVideogamesCopy: filteredVGCreated, leakedGamesBySource: filteredVGCreated };
             };
-            
+
             return { ...state, allVideogames: state.allVGOriginal, allVideogamesCopy: state.allVGOriginal, leakedGamesBySource: state.allVGOriginal };
+
+            case ORDER_ALPHA:
+
+            if (!state.auxAllVgOriginal.length) {
+                state.auxAllVgOriginal = [ ...state.allVGOriginal ];
+            }
             
-
-        case ORDER_ALPHA:
-
+            
             if (payload === 'A to Z') {
                 const orderedVideogames = state.allVideogamesCopy.sort((a, b) => a.name < b.name ? -1 : 1);
                 const allVGOrdered = state.allVGOriginal.sort((a, b) => a.name < b.name ? -1 : 1);
@@ -92,7 +104,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };                        
                 
             
-        case ORDER_BY_RATING:
+            case ORDER_BY_RATING:
+            
+            if (!state.auxAllVgOriginal.length) state.auxAllVgOriginal = [ ...state.allVGOriginal ];
+            
             if (payload === 'Lowest rating') {
                 const orderedVideogames = state.allVideogamesCopy.sort((a, b) => a.rating - b.rating);
                 const allVGOrdered = state.allVGOriginal.sort((a, b) => a.rating - b.rating);
@@ -104,10 +119,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 return { ...state, allVideogames: orderedVideogames, allVideogamesCopy: orderedVideogames, allVGOriginal: allVGOrdered };
             };
                
-        
-        case ERROR_REQUEST: 
+            
+            case ERROR_REQUEST: 
             return { ...state, errorRequest: payload };
-
+            
+            case RESET_ORDER:
+            if (!state.auxAllVgOriginal.length) return { ...state };
+            else return { ...state, allVideogames: state.auxAllVgOriginal, allVideogamesCopy: state.auxAllVgOriginal, allVGOriginal: [ ...state.auxAllVgOriginal], leakedGamesBySource: state.auxAllVgOriginal };
 
         default:
             return { ...state };

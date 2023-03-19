@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, NEXT_PAGE, PREV_PAGE, SET_CURRENT_PAGE, FILTER_BY_GENRE, FILTER_BY_SOURCE, ORDER_ALPHA, ORDER_BY_RATING, ERROR_REQUEST } from './action-types.js';
+import { GET_ALL_VIDEOGAMES, VIDEOGAMES_SEARCH, NEXT_PAGE, PREV_PAGE, SET_CURRENT_PAGE, RESET_HOME, FILTER_BY_GENRE, FILTER_BY_SOURCE, ORDER_ALPHA, ORDER_BY_RATING, ERROR_REQUEST, RESET_ORDER } from './action-types.js';
 
 
 
@@ -14,15 +14,19 @@ export const getAllVideogames = () => {
     };
 };
 
+// export const videogamesSearch = (gameName) => {
+//     return async (dispatch) => {
+//         try {
+//             const { data } = (await axios.get(`http://localhost:3001/videogames/?name=${gameName}`));
+//             return dispatch({ type: VIDEOGAMES_SEARCH, payload: data });            
+//         } catch (error) {
+//             return dispatch({ type: ERROR_REQUEST, payload: error.response.data.error });
+//         };
+//     };
+// };
+
 export const videogamesSearch = (gameName) => {
-    return async (dispatch) => {
-        try {
-            const { data } = (await axios.get(`http://localhost:3001/videogames/?name=${gameName}`));
-            return dispatch({ type: VIDEOGAMES_SEARCH, payload: data });            
-        } catch (error) {
-            return dispatch({ type: ERROR_REQUEST, payload: error.response.data.error });
-        };
-    };
+    return { type: VIDEOGAMES_SEARCH, payload: gameName };
 };
 
 export const nextPage = (firstIndexOfPage) => {
@@ -31,6 +35,14 @@ export const nextPage = (firstIndexOfPage) => {
 
 export const prevPage = (firstIndexOfPage) => {
     return { type: PREV_PAGE, payload: firstIndexOfPage };
+};
+
+export const setCurrentPage = (currentPage) => {
+    return { type: SET_CURRENT_PAGE, payload: currentPage };
+};
+
+export const resetHome = () => {
+    return { type: RESET_HOME };
 };
 
 export const filterByGenre = (option) => {
@@ -49,10 +61,10 @@ export const orderByRating = (order) => {
     return { type: ORDER_BY_RATING, payload: order };
 };
 
-export const setCurrentPage = (currentPage) => {
-    return { type: SET_CURRENT_PAGE, payload: currentPage };
-};
-
 export const setError = (error) => {
     return { type: ERROR_REQUEST, payload: error };
+};
+
+export const resetOrder = () => {
+    return { type: RESET_ORDER };
 };

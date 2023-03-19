@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getAllVideogames } from '../../redux/action-creators';
 
 import css from './landing.module.css';

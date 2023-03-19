@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import { orderAlpha, orderByRating, setCurrentPage } from "../../redux/action-creators";
+import { orderAlpha, orderByRating, setCurrentPage, resetOrder } from "../../redux/action-creators";
 import { useDispatch } from 'react-redux';
 import css from './ordered.module.css';
 import joystickIco from '../../assets/icons/joystickViolet.png';
 import arrowDown from '../../assets/icons/arrowDown.png';
 import arrowMenu from '../../assets/icons/arrowViolet.png';
+import resetImg from '../../assets/icons/reset.png';
 
 const Ordered = () => {
     const dispatch = useDispatch();
@@ -44,6 +45,13 @@ const Ordered = () => {
         else return dispatch(orderByRating(order));
     };
 
+    const resetOrderHandler = () => {
+        dispatch(resetOrder());
+        dispatch(setCurrentPage(1));
+        const resetImg = document.querySelector('#resetImg');
+        resetImg.classList.toggle(css.spinImg);
+    };
+
 
     return (
         <>  
@@ -77,6 +85,11 @@ const Ordered = () => {
                         <li onClick={orderHandler} >Lowest rating</li>
                     </ul>
                 </div>
+
+                <div className={`${css.resetOrderBtn}`} onClick={resetOrderHandler} >
+                    <h3>Reset order</h3><img src={resetImg} className={css.resetImg} id='resetImg' />
+                </div>
+
             </div>
         </>
     )

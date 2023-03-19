@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar.jsx';
-import { setCurrentPage, filterBySource, getAllVideogames } from '../../redux/action-creators.js';
+import { setCurrentPage, resetHome, filterBySource } from '../../redux/action-creators.js';
 import css from './navBar.module.css';
 import joystickIco from '../../assets/icons/joystickViolet.png';
 
@@ -10,21 +10,21 @@ const NavBar = () => {
 
     const { pathname } = useLocation();
     const dispatch = useDispatch();
+    const { allVGOriginal, allVideogamesCopy } = useSelector((state) => state);
   
 
     const gamesSourceHandler = (event) => {
         const source = event.target.textContent;
-        const loader = document.querySelector('#loader');
-
-        if (source === 'All videogames') {
-            loader.classList.remove('visibilityLoader'); 
-            dispatch(getAllVideogames())
-        } else {
-            dispatch(filterBySource(source));            
-        };
+        dispatch(filterBySource(source));     
         dispatch(setCurrentPage(1));
     };
-
+    
+    
+    const resetHomeHandler = () => {
+        // if (allVideogamesCopy.length < allVGOriginal.length ) return;        
+        dispatch(resetHome());
+        dispatch(setCurrentPage(1));
+    };
 
     return (
         <>  
@@ -32,7 +32,7 @@ const NavBar = () => {
                 <div className={css.contNav} >          
                     <div className={css.contTitle} >
                         <img src={joystickIco} className={css.logoImg} />     
-                        <Link to='/home' className={css.title} ><h1>Video-Games</h1></Link>
+                        <Link to='/home' className={css.title} onClick={resetHomeHandler} ><h1>Video-Games</h1></Link>
                     </div>
 
                     <div className={css.contLinks} >

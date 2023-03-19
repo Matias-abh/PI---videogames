@@ -319,7 +319,7 @@
     opacity: 0;
     top: -60rem;
     /* transform: scale(3.5); */
-    transition: top 1.2s, opacity 1s;
+    transition: top 1s, opacity .7s;
 }
 
 
