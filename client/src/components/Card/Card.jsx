@@ -14,7 +14,7 @@ const Card = ({ id, name, image, genres, Genres, rating, created }) => {
                     <div className={css.name} ><h2>{name}</h2></div>
 
                     <div className={css.contImg} >                    
-                        <img src={image} />
+                        <img src={image} alt={name} />
                     </div>
                     
                     <div className={css.contRating} >

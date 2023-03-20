@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import validation from './validation.js';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import css from './form.module.css';
 import xIco from '../../assets/icons/xIco.png';
@@ -126,7 +126,7 @@ const Form = () => {
         <>
         <div className={css.container} >
                 <div className={css.contTitle}>                    
-                    <h1>Create your <img src={joystickIco} /> <span>videogame!</span></h1>
+                    <h1>Create your <img src={joystickIco} alt='joystick' /> <span>videogame!</span></h1>
                     <p>Create an entry for your videogame to become part of the great list of <span>videogames</span> on our site.</p>
                 </div>
             <div className={css.form} >
@@ -169,7 +169,7 @@ const Form = () => {
                     </select>
                         {errors.genres && <div className={css.errors} >⚠ {errors.genres}</div>}
                         <div className={css.contArrayGenres} >
-                            {genreNames.map((genre, idx) => <span key={idx} >{genre}<img name={genre} onClick={removeGenre} src={xIco}/></span> )}
+                            {genreNames.map((genre, idx) => <span key={idx} >{genre}<img name={genre} onClick={removeGenre} src={xIco} alt='x' /></span> )}
                         </div>
                     </section>
 
@@ -198,7 +198,7 @@ const Form = () => {
                         </select>
                             {errors.platforms && <div className={css.errors} >⚠ {errors.platforms}</div>}
                         <div className={css.contArrayPlatforms} >
-                            {form.platforms.map((platform, idx) => <span key={idx} >{platform}<img name={platform} onClick={removePlatform} src={xIco}/></span> )}
+                            {form.platforms.map((platform, idx) => <span key={idx} >{platform}<img name={platform} onClick={removePlatform} src={xIco} alt='x' /></span> )}
                         </div>
                     </section>
 
@@ -210,9 +210,9 @@ const Form = () => {
         </div>
 
         <dialog id='modalSubmit' className={css.modalSubmit} >
-            {backSuccessResponse && <img src={joystickIco} /> || backErrorResponse && <img src={xError} /> }
-            {backSuccessResponse && <h1>Great!</h1> || backErrorResponse && <h1>Something went wrong!</h1> }
-            {backSuccessResponse && <h2>{backSuccessResponse}</h2> || backErrorResponse && <h2>{backErrorResponse}</h2> }
+            {(backSuccessResponse && <img src={joystickIco} alt='joystick' />) || (backErrorResponse && <img src={xError} alt='error' />) }
+            {(backSuccessResponse && <h1>Great!</h1>) || (backErrorResponse && <h1>Something went wrong!</h1>) }
+            {(backSuccessResponse && <h2>{backSuccessResponse}</h2>) || (backErrorResponse && <h2>{backErrorResponse}</h2>) }
             {idCreatedGame && <div><Link to={`/detail/${idCreatedGame}`} className={css.goToSeeItLink} ><h2 className={css.goToSeeIt} >Go to see it!</h2></Link> <span className={css.or} >or</span></div>}
             <span onClick={reload} className={css.linkToHomeModal} ><div className={css.btnHomeModal} >Back to Home</div></span>
         </dialog>

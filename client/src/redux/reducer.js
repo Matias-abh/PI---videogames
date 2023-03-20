@@ -57,7 +57,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 if (game.created) return game.Genres.find((genre) => genre.name === payload);
             });
             const filteredVGAPI = state.allVGOriginal.filter((game) => {
-                if (!game.created) return game.genres.find((genre) => genre === payload);                   
+                if (!game.created) return game.genres.find((genre) => genre === payload);
             });
 
             const created = state.leakedGamesBySource.filter((game) => game.created === true);

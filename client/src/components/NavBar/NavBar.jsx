@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import { setCurrentPage, resetHome, filterBySource } from '../../redux/action-creators.js';
@@ -10,7 +10,6 @@ const NavBar = () => {
 
     const { pathname } = useLocation();
     const dispatch = useDispatch();
-    const { allVGOriginal, allVideogamesCopy } = useSelector((state) => state);
   
 
     const gamesSourceHandler = (event) => {
@@ -21,7 +20,6 @@ const NavBar = () => {
     
     
     const resetHomeHandler = () => {
-        // if (allVideogamesCopy.length < allVGOriginal.length ) return;        
         dispatch(resetHome());
         dispatch(setCurrentPage(1));
     };
@@ -31,7 +29,7 @@ const NavBar = () => {
             <div className={css.navBar}>
                 <div className={css.contNav} >          
                     <div className={css.contTitle} >
-                        <img src={joystickIco} className={css.logoImg} />     
+                        <img src={joystickIco} className={css.logoImg} alt='joystick' />     
                         <Link to='/home' className={css.title} onClick={resetHomeHandler} ><h1>Video-Games</h1></Link>
                     </div>
 

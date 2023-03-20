@@ -37,7 +37,7 @@ const SearchBar = () => {
                         <input type='text' name='search' onChange={searched} value={search} placeholder='Search videogame...' />
                     </div>
                     <div className={css.contSearchIco} >
-                        <img src={searchIco} onClick={searchHandler} />
+                        <img src={searchIco} onClick={searchHandler} alt='search' />
                     </div>
                 </div>
             </div>

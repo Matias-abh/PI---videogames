@@ -10,7 +10,7 @@ import logoJoystick from '../../assets/icons/logoJoystickCircle.png';
 const Landing = () => {
     const dispatch = useDispatch();
     const videogamesSlice = useSelector((state) => state.allVGOriginal).slice(0, 20);
-    const videogameImages = videogamesSlice.map((videogame, idx) => <img src={videogame.image} key={idx} /> );
+    const videogameImages = videogamesSlice.map((videogame, idx) => <img src={videogame.image} key={idx} alt='videogame' /> );
     const [ mounted, setMounted ] = useState(true);
     
     useEffect(() => {
@@ -56,7 +56,7 @@ const Landing = () => {
                     </div>
                 </div>
                 <div className={css.contLogoJoystick} >
-                    <Link to='/home'><img src={logoJoystick} /></Link>
+                    <Link to='/home'><img src={logoJoystick} alt='joystick' /></Link>
                 </div>
                 <div className={css.overlay} ></div>
                 <video className={css.videoBg} src={videoBg} type='video/mp4' autoPlay loop muted />

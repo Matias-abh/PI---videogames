@@ -81,13 +81,13 @@ const Pagination = () => {
                 </div>
 
                 <div className={css.contNumPages} >             
-                    <button disabled='' className={`${css.btnPrev} ${css.pagesBtns}`} onClick={prevPageHandler} id='prevBtn' ><img src={pagesBtn} className={css.imgPrevBtn} /></button>
+                    <button disabled='' className={`${css.btnPrev} ${css.pagesBtns}`} onClick={prevPageHandler} id='prevBtn' ><img src={pagesBtn} className={css.imgPrevBtn} alt='prev' /></button>
                     <div className={css.contArrayPages} >{arrayPages}</div>
-                    <button disabled='' className={`${css.btnNext} ${css.pagesBtns}`} onClick={nextPageHandler} id='nextBtn' ><img src={pagesBtn} className={css.imgNextBtn} /></button>
+                    <button disabled='' className={`${css.btnNext} ${css.pagesBtns}`} onClick={nextPageHandler} id='nextBtn' ><img src={pagesBtn} className={css.imgNextBtn} alt='next' /></button>
                 </div>
 
                 <div className={`${css.contGoUpBtn} `} id='goUpBtn' onClick={goUpHandler} >
-                    <div><img src={goUpIco} className={css.goUpBtn} /></div>                
+                    <div><img src={goUpIco} className={css.goUpBtn} alt='goup' /></div>                
                 </div>
 
             </div>

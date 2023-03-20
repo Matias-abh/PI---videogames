@@ -48,8 +48,8 @@ const Home = () => {
     return(
         <>
             <dialog id='modalError' className={css.modalError} >
-                <img src={closeIco} onClick={closeModal} className={css.imgCloseIco} />
-                <img src={xErrorB} className={css.imgError} />
+                <img src={closeIco} onClick={closeModal} className={css.imgCloseIco} alt='close' />
+                <img src={xErrorB} className={css.imgError} alt='error' />
                 <h1>{errorRequest}</h1>
                 <Link to='/home' ><div className={css.btnCloseModal} onClick={closeModal} >Back to Home</div></Link>     
             </dialog>
